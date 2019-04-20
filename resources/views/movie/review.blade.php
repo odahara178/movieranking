@@ -3,7 +3,6 @@
 @section('content')
 <h1>レビュー投稿ページ</h1>
 
-
     <div class="container border-bottom pb-2">
 
     <hr>
@@ -37,7 +36,6 @@
         </div>
 
     </div>
-    
 
 
 
