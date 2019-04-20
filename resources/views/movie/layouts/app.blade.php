@@ -113,7 +113,7 @@
                 </div>
             </nav>
 
-        <div class="container bg-white" style="width: 1375px; height: 1375px;" >
+        <div class="container bg-white p-4" style="width: 1375px; height: 1375px;" >
             @yield('content')
         </div>
         </main>
