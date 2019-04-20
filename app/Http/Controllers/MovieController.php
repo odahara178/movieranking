@@ -9,13 +9,8 @@ class MovieController extends Controller
 
     public function index()
     {
-        return view('');
+        return view('movie.index');
     }
-
-
-
-
-
 
     public function mypage()
     {
@@ -37,6 +32,20 @@ class MovieController extends Controller
         return view('movie.detail');
     }
 
+    public function search()
+    {
+        return view('movie.search');
+    }
+
+    public function update()
+    {
+        return view('movie.update');
+    }
+
+    public function review()
+    {
+        return view('movie.review');
+    }
 
 
 

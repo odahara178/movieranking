@@ -17,11 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
 
 // MovieRanking Route
+Route::get('/index', 'MovieController@index');
+
 Route::get('/mypage', 'MovieController@mypage');
 
 Route::get('/ranking', 'MovieController@ranking');
@@ -29,3 +31,9 @@ Route::get('/ranking', 'MovieController@ranking');
 Route::get('/warehouse', 'MovieController@warehouse');
 
 Route::get('/detail', 'MovieController@detail');
+
+Route::get('/search', 'MovieController@search');
+
+Route::get('/update', 'MovieController@update');
+
+Route::get('/review', 'MovieController@review');

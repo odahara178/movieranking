@@ -7,7 +7,9 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="">映画タイトル</h1>
+            <h6>ジャンル:<a href=''>アニメ</a></h6>
         </div>
+
         <div class="col-sm-4">
             <button type="button" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りに追加</button>
         </div>
