@@ -19,7 +19,6 @@
             <div class="col-md-6">
                 {{-- ページ遷移ボタン --}}
                 <div class="container my-3 d-flex justify-content-around">
-                        <button type="button" class="btn btn-primary">好きなジャンル：</button>
                         <a class="btn btn-secondary" href='/warehouse'>お気に入りページ</a>
                         <button type="button" class="btn btn-secondary">ランキング更新</button>
                     </div>
