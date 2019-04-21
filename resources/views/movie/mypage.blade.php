@@ -20,7 +20,7 @@
                 {{-- ページ遷移ボタン --}}
                 <div class="container my-3 d-flex justify-content-around">
                         <a class="btn btn-secondary" href='/warehouse'>お気に入りページ</a>
-                        <button type="button" class="btn btn-secondary">ランキング更新</button>
+                        <a class="btn btn-secondary" href='/update'>ランキング更新</a>
                     </div>
 
                 <div class="card-deck">            
