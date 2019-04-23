@@ -27,10 +27,10 @@ class MovieController extends Controller
         return view('movie.warehouse');
     }
 
-    public function detail()
-    {
-        return view('movie.detail');
-    }
+    // public function detail()
+    // {
+    //     return view('movie.detail');
+    // }
 
     public function search()
     {

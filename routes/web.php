@@ -30,10 +30,13 @@ Route::get('/ranking', 'MovieController@ranking');
 
 Route::get('/warehouse', 'MovieController@warehouse');
 
-Route::get('/detail', 'MovieController@detail');
 
 Route::get('/search', 'MovieController@search');
 
 Route::get('/update', 'MovieController@update');
 
 Route::get('/review', 'MovieController@review');
+
+
+// コントローラー更新済み
+Route::get('/detail', 'DetailController@index');
