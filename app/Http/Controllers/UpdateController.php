@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MovieController extends Controller
+class UpdateController extends Controller
 {
-
     public function index()
     {
-        return view('movie.movie');
+        return view('movie.update');
     }
-
 }

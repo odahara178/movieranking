@@ -24,19 +24,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 // MovieRanking Route
 Route::get('/index', 'MovieController@index');
 
-Route::get('/mypage', 'MovieController@mypage');
+Route::get('/mypage', 'MypageController@index');
 
-Route::get('/ranking', 'MovieController@ranking');
+Route::get('/ranking', 'RankingController@index');
 
-Route::get('/warehouse', 'MovieController@warehouse');
+Route::get('/warehouse', 'WarehouseController@index');
 
+Route::get('/search', 'SearchController@index');
 
-Route::get('/search', 'MovieController@search');
+Route::get('/update', 'UpdateController@index');
 
-Route::get('/update', 'MovieController@update');
+Route::get('/review', 'ReviewController@index');
 
-Route::get('/review', 'MovieController@review');
-
-
-// コントローラー更新済み
 Route::get('/detail', 'DetailController@index');
