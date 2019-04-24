@@ -8,9 +8,11 @@
             全ジャンル
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">アクション</button>
-            <button class="dropdown-item" type="button">ミステリー</button>
-            <button class="dropdown-item" type="button">ホラー</button>
+
+            @foreach ($genres as $genre)
+            <button class="dropdown-item" type="button">{{$genre}}</button> 
+            @endforeach
+
         </div>
     </div>
 </div>

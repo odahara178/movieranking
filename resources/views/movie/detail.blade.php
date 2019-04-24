@@ -20,9 +20,9 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-sm-4">
-            <div class="card" style="height:50%;">
-                <img class="card-img-top" src={{$movies->image_path}} style="">
-            </div>
+            
+            <img class="img-thumbnail" src={{$movies->image_path}}>
+            
         </div>
         <div class="col-sm-8">
             <div class="card">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="card pt-1">
+            <div class="card mt-2">
                 <h6 class="card-header">{{$movies->title}}のレビュー</h6>
                 <div class="card-body">
                     <h4 class="card-text text-center border-bottom">★★★★☆</h4>
@@ -46,110 +46,107 @@
     </div>
 
     {{-- 動画表示 --}}
-    <div class="container mt-3">   
-        <div class="row">
-            <div class="col-sm-6">
-                <h5 class="p-1 text-center rounded" style="background-color:black; color: #FDD200;">関連動画(YouTube)</h5>
-                <div class="card-group">
-                    <div class="card">
-                        <iframe width="auto" height="auto" src="https://www.youtube.com/embed/ZMblEc7KNQA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    
-                    </div>
-                    <div class="card">
-                        <iframe width="auto" height="auto" src="https://www.youtube.com/embed/udDIkl6z8X0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
+    <div class="container mt-4">      
+            <h5 class="p-1 text-center rounded bg-dark text-white">関連動画(YouTube)</h5>
+        <div class="card-group">
+            <div class="card">
+                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/ZMblEc7KNQA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    
             </div>
-
-            {{-- 関連作品表示 --}}
-            <div class="col-sm-6">
-                    <h5 class="p-1 text-center rounded" style="background-color:black; color: #FDD200;">関連作品</h5>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="card-group" alt="First slide">
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ヴェノム</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/02.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">セブン</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ユージュアル・サスペクツ</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="carousel-item">
-                            <div class="card-group" alt="Second slide">
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ヴェノム</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/02.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">セブン</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ユージュアル・サスペクツ</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
-    
-                        <div class="carousel-item">
-                            <div class="card-group" alt="Third slide">
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ヴェノム</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/02.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">セブン</small>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 230px;">
-                                    <div class="card-footer">
-                                        <small class="text-muted">ユージュアル・サスペクツ</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+            <div class="card">
+                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/udDIkl6z8X0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
+
+            {{-- 関連作品表示 --}}
+    <div class="container mt-4">
+        <h5 class="p-1 text-center rounded bg-dark text-white">関連作品</h5>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card-group" alt="First slide">
+                        <div class="card">
+                            <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ヴェノム</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/02.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">セブン</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ユージュアル・サスペクツ</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ヴェノム</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ヴェノム</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="card-group" alt="Second slide">
+                        <div class="card">
+                            <img class="card-img-top" src="/img/01.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ヴェノム</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/02.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">セブン</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ユージュアル・サスペクツ</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ユージュアル・サスペクツ</small>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="/img/03.jpg" alt="Card image cap" style="height: 250px;">
+                            <div class="card-footer">
+                                <small class="text-muted">ユージュアル・サスペクツ</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>    
+    </div>
+    
 </div>
 @endsection

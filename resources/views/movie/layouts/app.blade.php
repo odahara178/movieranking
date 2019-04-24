@@ -130,9 +130,11 @@
                     <ul class="navbar-nav mr-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
+                            <a class="nav-link" href="/index">TOP</a>
+                        </li> 
+                        <li class="nav-item">
                             <a class="nav-link" href="/mypage">マイページ</a>
-                        </li>
-                        
+                        </li>        
                         <li class="nav-item">
                             <a class="nav-link" href="/ranking">ランキング</a>
                         </li>
