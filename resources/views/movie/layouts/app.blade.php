@@ -28,7 +28,7 @@
         <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/index">
+                <a class="navbar-brand" href="/">
                     MovieRanking
                 </a>
 
@@ -57,10 +57,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="/"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        ログアウト
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -90,7 +90,7 @@
                         <ul class="navbar-nav mr-auto">
                             <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/index">TOP</a>
+                                <a class="nav-link" href="/">TOP</a>
                             </li>                     
                             <li class="nav-item">
                                 <a class="nav-link" href="/ranking">ランキング</a>
@@ -102,14 +102,14 @@
     
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-                            <div class="" id="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control">
+                            <form class="form-inline" action="/search" method="GET">
+                                <div class="form-group">
+                                <input type="text" name="keyword" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">検索</button>
+                                        <input class="btn btn-default" type="submit" value="検索">
                                     </span>
                                 </div>
-                            </div>
+                            </form>
                         </ul>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                     <ul class="navbar-nav mr-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/index">TOP</a>
+                            <a class="nav-link" href="/">TOP</a>
                         </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="/mypage">マイページ</a>

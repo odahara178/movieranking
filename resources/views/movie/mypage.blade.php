@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-md-5">
                 
-                <h3 class="" style="color: #ADA142;"><i class="fas fa-crown"></i>1位</h3>
-                <a href="/detail" class="href"><img class="img-thumbnail" src="/img/05.jpg" style="height: 500px; width: 400px;"></a>
+                <h3 class="" style="color: #ADA142;"><i class="fas fa-crown"></i>1位:{{$user->movies_1_title}}</h3>
+                <a href="/detail" class="href"><img class="img-thumbnail" src={{$user->movies_1_image_path}} style="height: 500px; width: 400px;"></a>
                 
             </div>
 
@@ -25,12 +25,12 @@
 
                 <div class="card-deck">            
                     <div class="card">
-                        <h4 class="card-title" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位</h4>
-                        <a href="/detail" class="href"><img class="img-thumbnail mx-auto" src="/img/01.jpg" style="height: 350px;"></a>
+                        <h4 class="card-title" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位:{{$user->movies_2_title}}</h4>
+                        <a href="/detail" class="href"><img class="img-thumbnail mx-auto" src={{$user->movies_2_image_path}} style="height: 350px;"></a>
                     </div>
                     <div class="card">
-                        <h4 class="card-title" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位</h4>
-                        <a href="/detail" class="href"><img class="img-thumbnail mx-auto" src="/img/03.jpg" style="height: 350px;"></a>
+                        <h4 class="card-title" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位:{{$user->movies_3_title}}</h4>
+                        <a href="/detail" class="href"><img class="img-thumbnail mx-auto" src={{$user->movies_3_image_path}} style="height: 350px;"></a>
                     </div>
                 </div>
             </div>

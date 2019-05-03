@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -22,13 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // MovieRanking Route
-Route::get('/index', 'MovieController@index');
-
-Route::get('/mypage', 'MypageController@index');
+Route::get('/', 'MovieController@index');
 
 Route::get('/ranking', 'RankingController@index');
-
-Route::get('/warehouse', 'WarehouseController@index');
 
 Route::get('/search', 'SearchController@index');
 
@@ -37,3 +33,9 @@ Route::get('/update', 'UpdateController@index');
 Route::get('/review', 'ReviewController@index');
 
 Route::get('/detail', 'DetailController@index');
+
+Route::group(['middleware' => ['auth']], function () {
+    // この中はログインされている場合のみルーティングされる
+    Route::get('/mypage', 'MypageController@index');
+    Route::get('/warehouse', 'WarehouseController@index');
+});

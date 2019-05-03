@@ -46,19 +46,20 @@
     </div>
 
     {{-- 動画表示 --}}
+
     <div class="container mt-4">      
             <h5 class="p-1 text-center rounded bg-dark text-white">関連動画(YouTube)</h5>
-        <div class="card-group">
-            <div class="card">
-                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/ZMblEc7KNQA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    
-            </div>
-            <div class="card">
-                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/udDIkl6z8X0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+        <div class="card-group">           
+            @foreach ($url as $ur)
+                <div class="card">
+                    <iframe width="auto" height="auto" src="{{$ur->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  
+                </div>
+            @endforeach
         </div>
     </div>
 
-            {{-- 関連作品表示 --}}
+
+        {{-- 関連作品表示 --}}
     <div class="container mt-4">
         <h5 class="p-1 text-center rounded bg-dark text-white">関連作品</h5>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

@@ -6,51 +6,45 @@
 
     <hr>
 
-    <div class="search_result border-bottom pb-3">
-        <div class="media">
-            
-            <a class="media-left" href="#">
-                <img class="card-img-top mx-auto d-block" src="/img/05.jpg" alt="Card image cap" style="height: 259px; width: 226px;">
-            </a>
-            
+    @foreach ($movies as $movie)
+    <div class="search_result border-bottom py-3">
+        <div class="media">           
+            <a class="media-left mr-3" href="#">
+                <img class="img-thumbnail card-img-top mx-auto d-block" src="{{$movie->image_path}}" alt="Card image cap" style="height: 350px; width: 280px;">
+            </a>           
             <div class="media-body">
-                <h4 class="media-heading d-inline border-left border-warning">言の葉の庭</h4>
-                <h6 class="d-inline float-right">ジャンル:<a href=''>アニメ</a></h6>
+                <h4 class="media-heading d-inline border-left border-warning">{{$movie->title}}</h4>
+                <h6 class="d-inline float-right">ジャンル:<a href='#'>{{$movie->genre}}</a></h6>
                 <h5 class="mt-2">あらすじ</h5>
                 <hr>
-                <h6>靴職人を目指す高校生のタカオ（秋月孝雄）は、雨の日の1限は授業をサボって、庭園で靴のデザインを考えていた。ある日、タカオはそこで昼間からビールを飲んでいる女性、ユキノ（雪野百香里）に出会う。どこかで会ったかとタカオが尋ねると、ユキノは否定し、万葉集の短歌 「雷神（なるかみ）の 少し響みて さし曇り 雨も降らぬか 君を留めむ」 を言い残して去っていった。</h6>
+                <h6>{{$movie->summary}}</h6>
+                <div class="float-right">
+                    <a href="#" class="btn btn-primary ">作品情報を見る</a>
+                </div>
             </div>
         </div>
-        <h1>↓右寄せできない。。。</h1>
-        <a href="" class="btn btn-primary text-right">作品情報を見る</a>
-
+    </div> 
+    @endforeach
+    
+    <div class="container mx-auto" style="width: 200px;">
+        <nav aria-label="Page navigation example" class="text-center">
+            <ul class="pagination">
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-
-    <div class="search_result border-bottom pb-3">
-        <div class="media">
-            
-            <a class="media-left" href="#">
-                <img class="card-img-top mx-auto d-block" src="/img/05.jpg" alt="Card image cap" style="height: 259px; width: 226px;">
-            </a>
-            
-            <div class="media-body">
-                <h4 class="media-heading d-inline border-left border-warning">言の葉の庭</h4>
-                <h6 class="d-inline float-right">ジャンル:<a href=''>アニメ</a></h6>
-                <h5 class="mt-2">あらすじ</h5>
-                <hr>
-                <h6>靴職人を目指す高校生のタカオ（秋月孝雄）は、雨の日の1限は授業をサボって、庭園で靴のデザインを考えていた。ある日、タカオはそこで昼間からビールを飲んでいる女性、ユキノ（雪野百香里）に出会う。どこかで会ったかとタカオが尋ねると、ユキノは否定し、万葉集の短歌 「雷神（なるかみ）の 少し響みて さし曇り 雨も降らぬか 君を留めむ」 を言い残して去っていった。</h6>
-            </div>
-        </div>
-        <h1>↓右寄せできない。。。</h1>
-        <a href="" class="btn btn-primary text-right">作品情報を見る</a>
-
-    </div>
-
-
-
-
-
-
 
 
 

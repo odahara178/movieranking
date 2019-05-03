@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Movie;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
@@ -16,9 +17,15 @@ class DetailController extends Controller
         // configファイルから配列を取り出す
         $genres = Config::get('genres');
         $genre = $genres[$movies->genre];
+    
+        $url = DB::table('related_videos')
+        ->where('movie_id', '=', $id)
+        ->select('url')
+        ->get();
 
 
-        return view('movie.detail', compact('movies','genre'));
+        
+        return view('movie.detail', compact('movies', 'genre', 'url'));
     }
 
 
