@@ -15,6 +15,7 @@ class SearchController extends Controller
 
             $movies = DB::table('movies')
             ->where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('summary', 'like', '%' . $keyword . '%')
             ->get();           
 
         } else{           
@@ -22,9 +23,7 @@ class SearchController extends Controller
             $movies = DB::table('movies')->get();       
 
         }
-
-        
-        
+   
         return view('movie.search', compact('movies', 'keyword'));
     }
 }

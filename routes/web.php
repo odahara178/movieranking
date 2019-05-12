@@ -24,18 +24,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 // MovieRanking Route
 Route::get('/', 'MovieController@index');
 
-Route::get('/ranking', 'RankingController@index');
 
 Route::get('/search', 'SearchController@index');
 
 Route::get('/update', 'UpdateController@index');
 
-Route::get('/review', 'ReviewController@index');
+Route::get('/review/{id}', 'ReviewController@index');
 
-Route::get('/detail', 'DetailController@index');
+
+Route::get('/ranking/{id}', 'RankingController@index');
+
+Route::get('/detail/{id}', 'DetailController@index');
 
 Route::group(['middleware' => ['auth']], function () {
-    // この中はログインされている場合のみルーティングされる
     Route::get('/mypage', 'MypageController@index');
     Route::get('/warehouse', 'WarehouseController@index');
+    Route::post('/review/{id}', 'ReviewController@create');
 });
+

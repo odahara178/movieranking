@@ -36,9 +36,16 @@
                 <h6 class="card-header">{{$movies->title}}のレビュー</h6>
                 <div class="card-body">
                     <h4 class="card-text text-center border-bottom">★★★★☆</h4>
-                    <p class="border-bottom h6">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis temporibus possimus incidunt perferendis voluptates expedita, deserunt enim molestiae nulla? Voluptatem doloribus soluta eveniet libero pariatur nemo expedita repudiandae beatae tempora excepturi totam, unde quaerat vero natus minus, amet molestias minima?</p>
+                    @isset($review)
+                        <p class="h6">{{$review->content}}</p>
+                    @endisset
+
+                    @empty($review)
+                        <p class="h6">この作品にはまだレビューがありません。</p>
+                    @endempty
+                    
                     <div class="text-center">
-                        <a href="/review" class="btn btn-secondary">レビューをもっと見る・投稿する</a>
+                        <a href="/review/{{$movies->id}}" class="btn btn-secondary">レビューをもっと見る・投稿する</a>
                     </div>              
                 </div>
             </div>
@@ -50,9 +57,9 @@
     <div class="container mt-4">      
             <h5 class="p-1 text-center rounded bg-dark text-white">関連動画(YouTube)</h5>
         <div class="card-group">           
-            @foreach ($url as $ur)
+            @foreach ($urls as $url)
                 <div class="card">
-                    <iframe width="auto" height="auto" src="{{$ur->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  
+                    <iframe width="auto" height="auto" src="{{$url->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  
                 </div>
             @endforeach
         </div>

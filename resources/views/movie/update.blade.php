@@ -13,7 +13,7 @@
     <div class="card-deck"> 
         <div class="card">
                 <h5 class="card-title" style="color: #ADA142;"><i class="fas fa-crown"></i>1位</h5>
-            <a href="/detail" class="href"><img class="card-img-top" src="/img/01.jpg" style="height: 450px;"></a>
+            <a href="/detail" class="href"><img class="card-img-top img-thumbnail" src="/img/01.jpg" style="height: 450px;"></a>
 
             <div class="card-body text-center">
             <a href="#" class="btn btn-primary pt-1 btn-lg" data-toggle="modal" data-target="#modal1">変更</a>
@@ -22,22 +22,18 @@
         </div>           
         <div class="card">
             <h5 class="card-title" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位</h5>
-            <a href="/detail" class="href"><img class="card-img-top" src="/img/02.jpg" style="height: 450px;"></a>
+            <a href="/detail" class="href"><img class="card-img-top img-thumbnail" src="/img/02.jpg" style="height: 450px;"></a>
             <div class="card-body text-center">
                 <a href="#" class="btn btn-primary pt-1 btn-lg" data-toggle="modal" data-target="#modal1">変更</a>
             </div>
         </div>
         <div class="card">
             <h5 class="card-title" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位</h5>
-            <a href="/detail" class="href"><img class="card-img-top" src="/img/03.jpg" style="height: 450px;"></a>
+            <a href="/detail" class="href"><img class="card-img-top img-thumbnail" src="/img/03.jpg" style="height: 450px;"></a>
             <div class="card-body text-center">
                 <a href="#" class="btn btn-primary pt-1 btn-lg" data-toggle="modal" data-target="#modal1">変更</a>
             </div>
         </div>
-    </div>
-
-    <div class="container my-3 d-flex justify-content-around">
-        <button type="button" class="btn btn-secondary btn-lg">ランキング更新</button>
     </div>
         
         

@@ -25,7 +25,7 @@
                     <tr>
                     <th scope="row" class="text-center d-block">2</th>
                     <td>
-                        <a href="" >ミッション:インポッシブル/ローグ・ネイション(...表示)</a>
+                        <a href="" >{{str_limit("ミッション:インポッシブル/ローグ・ネイション", 40)}}</a>
                     </td>
                     <td>★★★★☆</td>
                     </tr>
@@ -89,7 +89,7 @@
                     <tr>
                     <th scope="row" class="text-center">1</th>
                     <td>
-                        <a href="/detail">ルパン三世 カリオストロの城</a>
+                        <a href="/detail/1">言の葉の庭</a>
                     </td>
                     <td>★★★★★</td>
                     </tr>
@@ -152,7 +152,7 @@
                 <thead class="text-center">
                     <tr>
                     <th scope="col"  colspan="3">
-                        <a href="">真実の行方</a>
+                        <a href="">サスペンス</a>
                     </th>
                     </tr>
                 </thead>
@@ -160,7 +160,7 @@
                     <tr>
                     <th scope="row" class="text-center">1</th>
                     <td>
-                        <a href="#">ルパン三世 カリオストロの城</a>
+                        <a href="#">真実の行方</a>
                     </td>
                     <td>★★★★★</td>
                     </tr>
@@ -209,6 +209,77 @@
                     <th scope="row" class="text-center">3</th>
                     <td>
                         <a href="#">ハリー・ポッターと賢者の石</a>
+                    </td>
+                    <td>★★★☆☆</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-dark">
+                <thead class="text-center">
+                    <tr>
+                    <th scope="col"  colspan="3">
+                        <a href="">ドラマ</a>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row" class="text-center">1</th>
+                    <td>
+                        <a href="#">たった一度の歌</a>
+                    </td>
+                    <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                    <th scope="row" class="text-center d-block">2</th>
+                    <td>
+                        <a href="#">ボヘミアン・ラプソディ</a>
+                    </td>
+                    <td>★★★★☆</td>
+                    </tr>
+                    <tr>
+                    <th scope="row" class="text-center">3</th>
+                    <td>
+                        <a href="#">ショーシャンクの空に</a>
+                    </td>
+                    <td>★★★☆☆</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-dark">
+                <thead class="text-center">
+                    <tr>
+                    <th scope="col"  colspan="3">
+                        <a href="#">恋愛</a>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row" class="text-center">1</th>
+                    <td>
+                        <a href="#">ちはやふる　上の句</a>
+                    </td>
+                    <td>★★★★★</td>
+                    </tr>
+                    <tr>
+                    <th scope="row" class="text-center">2</th>
+                    <td>
+                        <a href="#">Love Letter</a>
+                    </td>
+                    <td>★★★★☆</td>
+                    </tr>
+                    <tr>
+                    <th scope="row" class="text-center">3</th>
+                    <td>
+                        <a href="#">いま、会いにゆきます</a>
                     </td>
                     <td>★★★☆☆</td>
                     </tr>
