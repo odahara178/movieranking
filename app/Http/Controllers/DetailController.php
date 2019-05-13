@@ -16,10 +16,33 @@ class DetailController extends Controller
     public function index($id){
         // $id = 表示したいMovie_id
         $movies = Movie::find($id);
-        $genre = $this->getGenres($movies->genre);  
+        $genre = $this->getGenres($movies->genre);
         $urls = $this->getUrls($id);
         $review = $this->getReviews($id);
-        return view('movie.detail', compact('movies', 'genre', 'urls', 'review'));
+        $average = $this->getAverage($id);
+        return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average'));
+    }
+
+    private function getAverage($id){
+        // 指定のevaluationのみ取得
+        $evaluation = DB::table('reviews')
+        ->where('movie_id', '=', $id)
+        ->select('evaluation')
+        ->get();
+
+        // evaluation合計の算出
+        $total = 0;
+        for ($i = 0; $i < count($evaluation); $i++) {
+            $total += $evaluation[$i]->evaluation;
+        }
+
+        // レビューがない場合のエラー回避
+        if(count($evaluation) == 0){
+            $average = "0";
+        }else{
+            $average = round($total/count($evaluation));
+        }
+        return $average;
     }
 
     private function getGenres($id){
@@ -43,7 +66,4 @@ class DetailController extends Controller
         ->first();
         return $review;
     }
-
-
-
 }

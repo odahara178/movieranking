@@ -35,7 +35,8 @@
             <div class="card mt-2">
                 <h6 class="card-header">{{$movies->title}}のレビュー</h6>
                 <div class="card-body">
-                    <h4 class="card-text text-center border-bottom">★★★★☆</h4>
+                    <h4 class="card-text text-center border-bottom">{{Config::get('evaluations')[$average]}}</h4>
+                    
                     @isset($review)
                         <p class="h6">{{$review->content}}</p>
                     @endisset

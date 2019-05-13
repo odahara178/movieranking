@@ -12,9 +12,7 @@
                 <table>
                     <tr>
                         <th>ユーザー名:〇〇</th>
-                        <h4>
-                            {{-- ★★★★☆ --}}
-                            {{-- @for ($review) --}}
+                        <h4>{{Config::get('evaluations')[$review->evaluation]}}
                             {{$review->evaluation}}
                         </h4>
                     </tr>
