@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
     public function index($id)
     {
-        $reviews = Review::where('movie_id', $id)->get();
+        // $reviews = Review::where('movie_id', $id)
+        // -> get();
+
+        $reviews = DB::table('reviews')
+        ->join('users', 'reviews.user_id', '=', 'users.id')
+        ->where('movie_id', $id)
+        ->select('name','content','evaluation')
+        ->get();
 
         return view('movie.review', compact('reviews'));
     }

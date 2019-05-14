@@ -11,7 +11,7 @@
             <div class="review border-bottom py-3">
                 <table>
                     <tr>
-                        <th>ユーザー名:〇〇</th>
+                        <th>ユーザー名:{{$review->name}}</th>
                         <h4>{{Config::get('evaluations')[$review->evaluation]}}
                             {{$review->evaluation}}
                         </h4>
@@ -22,10 +22,8 @@
                 </table>
             </div>
         @endforeach
-
-
     </div>
-          
+    
     <div class="container mt-4">
         {{-- 投稿フォーム --}}
         <div class="posted_form">
