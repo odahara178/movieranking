@@ -89,7 +89,7 @@
                     <tr>
                     <th scope="row" class="text-center">1</th>
                     <td>
-                        <a href="/detail/1">言の葉の庭</a>
+                        <a href="/movie/detail/1">言の葉の庭</a>
                     </td>
                     <td>★★★★★</td>
                     </tr>

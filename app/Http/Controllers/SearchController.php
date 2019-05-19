@@ -10,20 +10,32 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
+        $sort = $request->sort;
 
-        if(!empty($keyword)){           
+        if(!empty($keyword)){
 
-            $movies = DB::table('movies')
+            // $movies = DB::table('movies')
+            // ->where('title', 'like', '%' . $keyword . '%')
+            // ->orWhere('summary', 'like', '%' . $keyword . '%')
+            // ->get();
+
+            $movie_query = DB::table('movies')
             ->where('title', 'like', '%' . $keyword . '%')
-            ->orWhere('summary', 'like', '%' . $keyword . '%')
-            ->get();           
+            ->orWhere('summary', 'like', '%' . $keyword . '%');
 
-        } else{           
+        } else{
 
-            $movies = DB::table('movies')->get();       
+            $movie_query = DB::table('movies');
+            // $movies = DB::table('movies')->get();
 
         }
-   
+
+        if ($sort) {
+            $movie_query->orderBy('updated_at', $sort);
+        }
+
+        $movies = $movie_query->get();
+
         return view('movie.search', compact('movies', 'keyword'));
     }
 }

@@ -9,7 +9,7 @@
     @foreach ($movies as $movie)
     <div class="search_result border-bottom py-3">
         <div class="media">           
-            <a class="media-left mr-3" href="/detail/{{$movie->id}}">
+            <a class="media-left mr-3" href="/movie/detail/{{$movie->id}}">
                 <img class="img-thumbnail card-img-top mx-auto d-block" src="{{$movie->image_path}}" alt="Card image cap" style="height: 350px; width: 280px;">
             </a>           
             <div class="media-body">
@@ -19,7 +19,7 @@
                 <hr>
                 <h6>{{$movie->summary}}</h6>
                 <div class="float-right">
-                    <a href="/detail/{{$movie->id}}" class="btn btn-primary ">作品情報を見る</a>
+                    <a href="/movie/detail/{{$movie->id}}" class="btn btn-primary ">作品情報を見る</a>
                 </div>
             </div>
         </div>

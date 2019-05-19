@@ -39,6 +39,8 @@
         
 </div>
 
+
+
 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -50,9 +52,9 @@
             </div>
             <div class="modal-body">
                     <div class="list-group" style="max-width: 200px;">
-                        <button type="button" class="list-group-item list-group-item-action">タイトル名（お気に入りから選ぶ）</button>
-                        <button type="button" class="list-group-item list-group-item-action">タイトル名</button>
-                        <button type="button" class="list-group-item list-group-item-action">タイトル名</button>
+                        @foreach ($favorites as $favorite)
+                            <button type="button" class="list-group-item list-group-item-action">{{$favorite->title}}</button>
+                        @endforeach
                     </div>
             </div>
             <div class="modal-footer">

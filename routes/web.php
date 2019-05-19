@@ -29,16 +29,20 @@ Route::get('/search', 'SearchController@index');
 
 Route::get('/update', 'UpdateController@index');
 
+
 Route::get('/review/{id}', 'ReviewController@index');
 
 
 Route::get('/ranking/{id}', 'RankingController@index');
 
-Route::get('/detail/{id}', 'DetailController@index');
+Route::get('/movie/detail/{id}', 'MovieController@detail');
+
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/mypage', 'MypageController@index');
     Route::get('/warehouse', 'WarehouseController@index');
     Route::post('/review/{id}', 'ReviewController@create');
+    Route::post('/favorite/{id}', 'FavoriteController@store');
 });
 

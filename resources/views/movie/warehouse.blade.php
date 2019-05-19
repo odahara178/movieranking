@@ -15,57 +15,22 @@
     </div>
 </div>
 
-
 <div class="container mt-2">
-    <div class="card-group">
-        <div class="card">
-            <h5 class="card-title text-center pt-1" style="color: #646766;">タイトル名</h5>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">                  
-                <p class="card-text">★★★☆☆</p>
+        <div class="card-group">
+
+        @foreach ($favorites as $favorite)
+            <div class=" border-bottom py-3">
+                <div class="card">
+                    <h5 class="card-title text-center pt-1" style="color: #646766;">{{$favorite->title}}</h5>
+                    <a href="/detail/{{$favorite->movie_id}}">
+                    <img class="img-thumbnail" src={{$favorite->image_path}} alt="Card image cap" style="height: 220px; width: 170px;">
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title text-center pt-1" style="color: #646766;">タイトル名</h5>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">                   
-                <p class="card-text">★★★☆☆</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title text-center pt-1" style="color: #646766;">タイトル名</h5>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">                   
-                <p class="card-text">★★★☆☆</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title text-center pt-1" style="color: #646766;">タイトル名</h5>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">                   
-                <p class="card-text">★★★☆☆</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title text-center pt-1" style="color: #646766;">タイトル名</h5>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">                   
-                <p class="card-text">★★★☆☆</p>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 </div>
-      
-
-
-
-
-
-
-
-
-
-
 
 
 

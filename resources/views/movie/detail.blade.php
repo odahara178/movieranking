@@ -9,11 +9,23 @@
             <h1 class="">{{$movies->title}}</h1>
             <h6>ジャンル:<a href=''>{{$genre}}</a></h6>
         </div>
-
+        
         <div class="col-sm-4">
-            <button type="button" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りに追加</button>
+        @if ($is_favorite)
+        <form action="/favorite/delete/{{$movies->id}}" class="form" method="post">
+            @csrf
+            <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りを解除する</button>
+        </form>
+
+        @else
+            <form action="/favorite/{{$movies->id}}" class="form" method="post">
+                @csrf
+                <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りに追加</button>
+            </form>
+
+            @endif
         </div>
-    </div>  
+    </div>
 </div>
 
 {{-- あらすじ&レビュー --}}
@@ -154,7 +166,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-        </div>    
+        </div>
     </div>
     
 </div>
