@@ -18,6 +18,7 @@ class CreateRankingsTable extends Migration
             $table->tinyInteger('genre');
             $table->tinyInteger('rank');
             $table->integer('movie_id')->unsigned()->index();
+            $table->float('evaluation', 2, 1);
             $table->timestamps();
         });
     }

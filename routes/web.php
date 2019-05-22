@@ -11,38 +11,25 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 // MovieRanking Route
 Route::get('/', 'MovieController@index');
-
-
-Route::get('/search', 'SearchController@index');
-
-Route::get('/update', 'UpdateController@index');
-
+Route::get('/movie/detail/{id}', 'MovieController@detail');
+Route::get('/movie/search', 'MovieController@search');
 
 Route::get('/review/{id}', 'ReviewController@index');
 
-
 Route::get('/ranking/{id}', 'RankingController@index');
 
-Route::get('/movie/detail/{id}', 'MovieController@detail');
-
-
-
+// ログイン済みユーザーのみ閲覧可能
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/mypage', 'MypageController@index');
-    Route::get('/warehouse', 'WarehouseController@index');
+    Route::get('mypage/myfavorite', 'MypageController@myFavorite');
     Route::post('/review/{id}', 'ReviewController@create');
     Route::post('/favorite/{id}', 'FavoriteController@store');
+    Route::get('/mypage/rankingupdate', 'MypageController@rankingUpdate');
 });
 

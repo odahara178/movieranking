@@ -102,7 +102,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-inline" action="/search" method="GET">
+                        <form class="form-inline" action="/movie/search" method="GET">
                             <div class="form-group">
                             <input type="text" name="keyword" class="form-control">
                                 <span class="input-group-btn">

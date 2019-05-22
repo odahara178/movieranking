@@ -19,8 +19,8 @@
             <div class="col-md-7">
                 {{-- ページ遷移ボタン --}}
                 <div class="container my-3 d-flex justify-content-around">
-                    <a class="btn btn-secondary" href='/warehouse'>お気に入りページ</a>
-                    <a class="btn btn-secondary" href='/update'>ランキング更新</a>
+                    <a class="btn btn-secondary" href='mypage/myfavorite'>お気に入りページ</a>
+                    <a class="btn btn-secondary" href='/mypage/rankingupdate'>ランキング更新</a>
                 </div>
 
                 <div class="card-deck">

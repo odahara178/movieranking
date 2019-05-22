@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-// use Illuminate\Foundation\Auth\User;
-use App\Movie;
-use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MypageController extends Controller
 {
@@ -20,7 +17,6 @@ class MypageController extends Controller
             ->select('movies_1.title as movies_1_title', 'movies_2.title as movies_2_title', 'movies_3.title as movies_3_title', 
             'movies_1.image_path as movies_1_image_path', 'movies_2.image_path as movies_2_image_path', 'movies_3.image_path as movies_3_image_path')
             ->first();
-
         return view('movie.mypage',compact('user'));
     }
 
@@ -32,7 +28,32 @@ class MypageController extends Controller
             $str = mb_substr($str, 0, $length - $markerlen, $encoding) . $trimmarker;
         }
         return $str;
-     }
+    }
+
+    public function myFavorite(){
+        $user_id = Auth::id();
+
+        $favorites = DB::table('favorites')
+        ->join('movies', 'movies.id', '=', 'favorites.movie_id')
+        ->where('user_id', $user_id)
+        ->select('movie_id', 'title' , 'image_path')
+        ->get();
+
+
+        return view('movie.warehouse', compact('favorites'));
+    }
+
+    public function rankingUpdate(){
+        $user_id = Auth::id();
+
+        $favorites = DB::table('favorites')
+        ->join('movies', 'movies.id', '=', 'favorites.movie_id')
+        ->where('user_id', $user_id)
+        ->select('movie_id', 'title' , 'image_path')
+        ->get();
+
+        return view('movie.update', compact('favorites'));
+    }
 
 
 

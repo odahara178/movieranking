@@ -14,11 +14,47 @@ class MovieController extends Controller
 
     public function index()
     {
-        return view('movie.top');
+        $all_ranks = $this->getAllRank();
+        $animation_ranks = $this->getAnimationRank();
+
+
+
+        return view('movie.top',compact('all_ranks', 'animation_ranks'));
     }
 
+// ランキングデータの呼び出し
+    private function getRanking(){
+        $rankings = DB::table('rankings')
+        ->join('movies','rankings.movie_id', '=', 'movies.id')
+        ->select('rankings.genre', 'rankings.rank', 'rankings.evaluation', 'movies.title', 'movies.id');
+        return $rankings;
+    }
+
+// 指定ジャンルのデータのみ取得
+    private function getAllRank(){
+        $all_ranks = $this->getRanking()
+        ->where('rankings.genre', 0)
+        ->get();
+        return $all_ranks;
+    }
+
+    private function getAnimationRank(){
+        $animation_ranks = $this->getRanking()
+        ->where('rankings.genre', 1)
+        ->get();
+        return $animation_ranks;
+    }
+
+
+
+
+
+
+
+
+
+
     public function detail($id){
-        // $id = 表示したいMovie_id
         $movies = Movie::find($id);
         $genre = $this->getGenres($movies->genre);
         $urls = $this->getUrls($id);
@@ -84,6 +120,32 @@ class MovieController extends Controller
         ->select('content')
         ->first();
         return $review;
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $sort = $request->sort;
+
+        if(!empty($keyword)){
+
+            $movie_query = DB::table('movies')
+            ->where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('summary', 'like', '%' . $keyword . '%');
+
+        } else{
+
+            $movie_query = DB::table('movies');
+
+        }
+
+        if ($sort) {
+            $movie_query->orderBy('updated_at', $sort);
+        }
+
+        $movies = $movie_query->get();
+
+        return view('movie.search', compact('movies', 'keyword'));
     }
 
 }
