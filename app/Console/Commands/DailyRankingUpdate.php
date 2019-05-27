@@ -1,24 +1,52 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Console\Command;
 use App\Ranking;
+use Illuminate\Support\Facades\DB;
 
-class RankingController extends Controller
+class DailyRankingUpdate extends Command
 {
-    public function index()
-    {
-        $genres = Config::get('genres');
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'daily:rankingUpdate';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Delete column of rankings table / insert movie data with high evaluation';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        // Rankingテーブルの削除
+        $ranking_delete = DB::table('rankings')->truncate();
+
+        // Rankingテーブルにデータ挿入
         $this -> insertAllRankings();
         $this -> insertAnimetionRankings();
         $this -> insertActionRankings();
         $this -> insertMysteryRankings();
-
-        return view('movie.ranking', compact('genres'));
     }
 
     public function insertAllRankings(){
