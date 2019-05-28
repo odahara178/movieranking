@@ -34,6 +34,7 @@ class MovieController extends Controller
     private function getAllRank(){
         $all_ranks = $this->getRanking()
         ->where('rankings.genre', 0)
+        ->where('rank', '<', 4)
         ->get();
         return $all_ranks;
     }
@@ -41,6 +42,7 @@ class MovieController extends Controller
     private function getAnimationRank(){
         $animation_ranks = $this->getRanking()
         ->where('rankings.genre', 1)
+        ->where('rank', '<', 4)
         ->get();
         return $animation_ranks;
     }

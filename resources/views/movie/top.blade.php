@@ -3,6 +3,7 @@
 @section('content')
 <h1>TOPページ</h1>
 
+{{-- 2ジャンル毎にコンテナを作成する --}}
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -25,7 +26,6 @@
                                 <td>{{Config::get('evaluations')[$all_rank->evaluation]}}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -52,13 +52,6 @@
             </table>
         </div>
     </div>
-
-
-
-
-
-
-
 </div>
 
 @endsection
