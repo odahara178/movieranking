@@ -9,18 +9,32 @@ use App\Ranking;
 
 class RankingController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         $genres = Config::get('genres');
+        $all_ranks = $this->getAllRank($id);
+        
+        // DBへデータ挿入用
+        // $this -> insertAllRankings();
+        // $this -> insertAnimetionRankings();
+        // $this -> insertActionRankings();
+        // $this -> insertMysteryRankings();
 
-        $this -> insertAllRankings();
-        $this -> insertAnimetionRankings();
-        $this -> insertActionRankings();
-        $this -> insertMysteryRankings();
-
-        return view('movie.ranking', compact('genres'));
+        return view('movie.ranking', compact('genres', 'all_ranks'));
     }
 
+// 指定ジャンルのデータのみ取得
+private function getAllRank($id){
+    $all_ranks = DB::table('rankings')
+    ->select('rankings.genre as genre', 'rankings.rank as rank', 'movies.title as title', 'movies.id as movie_id', 'movies.image_path as image_path', 'rankings.evaluation as evaluation')
+    ->join('movies','rankings.movie_id', '=', 'movies.id')
+    ->where('rankings.genre', $id)
+    ->where('rank', '<', 20)
+    ->get();
+    return $all_ranks;
+}
+
+// データ挿入用
     public function insertAllRankings(){
         $reviews = DB::table('reviews')
         ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')

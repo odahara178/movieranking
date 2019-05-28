@@ -108,7 +108,6 @@ class DailyRankingUpdate extends Command
         ->get();
         $evaluations = $this-> getEvaluation($reviews);
 
-
         foreach($evaluations as $rank => $evaluation) {
             Ranking::create([
                 'genre' => 3,
@@ -119,14 +118,8 @@ class DailyRankingUpdate extends Command
         }
     }
 
-// 配列が空だったとき用の関数作成するⅡ
-
-
 // 映画毎に合計評価を算出
     public function getEvaluation($reviews){
-
-        // 配列が空だったらリターンNULLⅠ
-
 
         $evaluations = [];
         foreach($reviews as $review){
@@ -150,16 +143,6 @@ class DailyRankingUpdate extends Command
             }
         }
 
-// エラー回避（考え中）
-        // foreach($evaluations as $movie_id => $evaluation) {
-        //     if(count($evaluation['total_evaluation']) == 0){
-        //         $average = "0";
-        //     }else{
-        //         $average = $evaluation['total_evaluation'] / $evaluation['count'];
-        //         $evaluations[$movie_id]['average'] = $average;
-        //     }
-        // }
-
         //  平均値の計算
         foreach($evaluations as $movie_id => $evaluation) {
             $average = $evaluation['total_evaluation'] / $evaluation['count'];
@@ -170,8 +153,11 @@ class DailyRankingUpdate extends Command
         foreach($evaluations as $key => $value){
             $average_arr[$key] = $value["average"];
         }
-        array_multisort($average_arr, SORT_DESC, $evaluations);
 
+        // レビューがない（ランキングが取得できない）場合のエラー回避
+        if (isset($average_arr)){
+            array_multisort($average_arr, SORT_DESC, $evaluations);
+        }
         return $evaluations;
     }
 

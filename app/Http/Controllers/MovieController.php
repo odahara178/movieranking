@@ -48,14 +48,6 @@ class MovieController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
     public function detail($id){
         $movies = Movie::find($id);
         $genre = $this->getGenres($movies->genre);

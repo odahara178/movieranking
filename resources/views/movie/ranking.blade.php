@@ -5,171 +5,30 @@
 <div class="container mt-1">
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            全ジャンル
+            ジャンル選択
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-
-            @foreach ($genres as $genre)
-            <button class="dropdown-item" type="button">{{$genre}}</button> 
-            @endforeach
-
+            <a class="btn dropdown-item" href='/ranking/0'>すべて</a>
+            <a class="btn dropdown-item" href='/ranking/1'>アニメ</a>
         </div>
     </div>
 </div>
-
 
 <div class="container mt-2">
-    <div class="card-group">
-        <div class="card">
-            <h5 class="card-title" style="color: #ADA142;"><i class="fas fa-crown"></i>1位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/01.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                  
-                <p class="card-text">タイトル名</p>
+    <div class="row">
+        @foreach ($all_ranks as $all_rank)
+            <div class="card col-3">
+                <h4 class="card-title mt-2" style="color: #ADA142;"><i class="fas fa-crown"></i>{{$all_rank->rank}}位</h4>
+                <a href="/movie/detail/{{$all_rank->movie_id}}">
+                    <img class="card-img-top img-thumbnail" src={{$all_rank->image_path}} alt="Card image cap" style="height: 300px; width: 280px;">
+                </a>
+                <div class="card-body">
+                    <p class="card-text">{{$all_rank->title}}</p>
+                    <p>{{Config::get('evaluations')[$all_rank->evaluation]}}{{$all_rank->evaluation}}</p>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/02.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/03.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">4位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/04.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">5位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-group">
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">6位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                  
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">7位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">8位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">9位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">10位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-group">
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">11位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                  
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">12位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">13位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">14位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">15位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-    </div>
-    <div class="card-group">
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">16位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                  
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">17位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">18位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">19位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
-        <div class="card">
-            <h5 class="card-title" style="color: #646766;">20位</h5>
-            <img class="card-img-top img-thumbnail" src="/img/05.jpg" alt="Card image cap" style="height: 300px; width: 280px;">
-            <div class="card-body">                   
-                <p class="card-text">タイトル名</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
-      
 
 @endsection
