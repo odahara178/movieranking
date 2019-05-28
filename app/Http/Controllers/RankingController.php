@@ -45,6 +45,7 @@ class RankingController extends Controller
         ->where('genre', 1)
         ->get();
         $evaluations = $this-> getEvaluation($reviews);
+
         foreach($evaluations as $rank => $evaluation) {
             Ranking::create([
                 'genre' => 1,
@@ -62,6 +63,7 @@ class RankingController extends Controller
         ->where('genre', 2)
         ->get();
         $evaluations = $this-> getEvaluation($reviews);
+
         foreach($evaluations as $rank => $evaluation) {
             Ranking::create([
                 'genre' => 2,
@@ -80,7 +82,6 @@ class RankingController extends Controller
         ->get();
         $evaluations = $this-> getEvaluation($reviews);
 
-
         foreach($evaluations as $rank => $evaluation) {
             Ranking::create([
                 'genre' => 3,
@@ -91,14 +92,8 @@ class RankingController extends Controller
         }
     }
 
-// 配列が空だったとき用の関数作成するⅡ
-
-
 // 映画毎に合計評価を算出
     public function getEvaluation($reviews){
-
-        // 配列が空だったらリターンNULLⅠ
-
 
         $evaluations = [];
         foreach($reviews as $review){
@@ -122,16 +117,6 @@ class RankingController extends Controller
             }
         }
 
-// エラー回避（考え中）
-        // foreach($evaluations as $movie_id => $evaluation) {
-        //     if(count($evaluation['total_evaluation']) == 0){
-        //         $average = "0";
-        //     }else{
-        //         $average = $evaluation['total_evaluation'] / $evaluation['count'];
-        //         $evaluations[$movie_id]['average'] = $average;
-        //     }
-        // }
-
         //  平均値の計算
         foreach($evaluations as $movie_id => $evaluation) {
             $average = $evaluation['total_evaluation'] / $evaluation['count'];
@@ -142,7 +127,10 @@ class RankingController extends Controller
         foreach($evaluations as $key => $value){
             $average_arr[$key] = $value["average"];
         }
-        array_multisort($average_arr, SORT_DESC, $evaluations);
+
+        if (isset($average_arr)){
+            array_multisort($average_arr, SORT_DESC, $evaluations);
+        }
 
         return $evaluations;
     }
