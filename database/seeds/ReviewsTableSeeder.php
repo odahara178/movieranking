@@ -11,6 +11,8 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(\App\Review::class, 20)->create();
+
         DB::table('reviews')->insert([
             [
             'movie_id'=>'1',
