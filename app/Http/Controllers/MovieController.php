@@ -16,10 +16,12 @@ class MovieController extends Controller
     {
         $all_ranks = $this->getAllRank();
         $animation_ranks = $this->getAnimationRank();
+        $action_ranks = $this->getActionRank();
+        $mystery_ranks = $this->getMysteryRank();
 
 
 
-        return view('movie.top',compact('all_ranks', 'animation_ranks'));
+        return view('movie.top',compact('all_ranks', 'animation_ranks', 'action_ranks', 'mystery_ranks'));
     }
 
 // ランキングデータの呼び出し
@@ -42,6 +44,22 @@ class MovieController extends Controller
     private function getAnimationRank(){
         $animation_ranks = $this->getRanking()
         ->where('rankings.genre', 1)
+        ->where('rank', '<', 4)
+        ->get();
+        return $animation_ranks;
+    }
+
+    private function getActionRank(){
+        $animation_ranks = $this->getRanking()
+        ->where('rankings.genre', 2)
+        ->where('rank', '<', 4)
+        ->get();
+        return $animation_ranks;
+    }
+
+    private function getMysteryRank(){
+        $animation_ranks = $this->getRanking()
+        ->where('rankings.genre', 3)
         ->where('rank', '<', 4)
         ->get();
         return $animation_ranks;

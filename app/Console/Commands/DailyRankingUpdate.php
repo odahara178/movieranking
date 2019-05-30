@@ -47,6 +47,17 @@ class DailyRankingUpdate extends Command
         $this -> insertAnimetionRankings();
         $this -> insertActionRankings();
         $this -> insertMysteryRankings();
+        $this -> insertSuspenseRankings();
+        $this -> insertHorrorRankings();
+        $this -> insertFantasyRankings();
+        $this -> insertSFRankings();
+        $this -> insertDramaRankings();
+        $this -> insertDocumentaryRankings();
+        $this -> insertWarRankings();
+        $this -> inserCrimeRankings();
+        $this -> insertComedyRankings();
+        $this -> insertSportsRankings();
+        $this -> insertLoveRankings();
     }
 
     public function insertAllRankings(){
@@ -111,6 +122,203 @@ class DailyRankingUpdate extends Command
         foreach($evaluations as $rank => $evaluation) {
             Ranking::create([
                 'genre' => 3,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertSuspenseRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 4)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 4,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertHorrorRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 5)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 5,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertFantasyRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 6)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 6,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertSFRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 7)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 7,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertDramaRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 8)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 8,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertDocumentaryRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 9)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 9,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertWarRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 10)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 10,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+    public function inserCrimeRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 11)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 11,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertComedyRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 12)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 12,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertSportsRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 13)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 13,
+                'rank' => $rank + 1,
+                'movie_id' => $evaluation['movie_id'],
+                'evaluation' => round($evaluation['average'], 1)
+            ]);
+        }
+    }
+
+    public function insertLoveRankings(){
+        $reviews = DB::table('reviews')
+        ->select('movies.id as movie_id', 'movies.genre as genre', 'reviews.evaluation as evaluation')
+        ->join('movies', 'reviews.movie_id', '=', 'movies.id')
+        ->where('genre', 14)
+        ->get();
+        $evaluations = $this-> getEvaluation($reviews);
+
+        foreach($evaluations as $rank => $evaluation) {
+            Ranking::create([
+                'genre' => 14,
                 'rank' => $rank + 1,
                 'movie_id' => $evaluation['movie_id'],
                 'evaluation' => round($evaluation['average'], 1)

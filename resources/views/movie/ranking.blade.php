@@ -10,6 +10,19 @@
         <div class="dropdown-menu dropdown-menu-right">
             <a class="btn dropdown-item" href='/ranking/0'>すべて</a>
             <a class="btn dropdown-item" href='/ranking/1'>アニメ</a>
+            <a class="btn dropdown-item" href='/ranking/2'>アクション</a>
+            <a class="btn dropdown-item" href='/ranking/3'>ミステリー</a>
+            <a class="btn dropdown-item" href='/ranking/4'>サスペンス</a>
+            <a class="btn dropdown-item" href='/ranking/5'>ホラー</a>
+            <a class="btn dropdown-item" href='/ranking/6'>ファンタジー</a>
+            <a class="btn dropdown-item" href='/ranking/7'>SF</a>
+            <a class="btn dropdown-item" href='/ranking/8'>ドラマ</a>
+            <a class="btn dropdown-item" href='/ranking/9'>ドキュメンタリー</a>
+            <a class="btn dropdown-item" href='/ranking/10'>戦争</a>
+            <a class="btn dropdown-item" href='/ranking/11'>犯罪</a>
+            <a class="btn dropdown-item" href='/ranking/12'>コメディ</a>
+            <a class="btn dropdown-item" href='/ranking/13'>スポーツ</a>
+            <a class="btn dropdown-item" href='/ranking/14'>恋愛</a>
         </div>
     </div>
 </div>

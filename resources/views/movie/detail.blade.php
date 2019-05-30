@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="">{{$movies->title}}</h1>
-            <h6>ジャンル:<a href=''>{{$genre}}</a></h6>
+            <h6>ジャンル:<a href='/ranking/{{$genre}}'>{{$genre}}</a></h6>
         </div>
         
         <div class="col-sm-4">
