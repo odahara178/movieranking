@@ -13,7 +13,11 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// API使用テスト用
+// Route::get('/test', 'TestController@getMovieData');
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // MovieRanking Route
 Route::get('/', 'MovieController@index');

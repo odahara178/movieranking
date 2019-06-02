@@ -1,24 +1,58 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use Illuminate\Http\Request;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use App\Movie;
 
-class TestController extends Controller
+class MonthlyMovieDataUpdate extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'monthly:moviedataupdate';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Delete column of movies table / insert movie data from TMDB';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $ranking_delete = DB::table('movies')->truncate();
+        $this -> getMovieData();
+    }
 
     public function getMovieData(){
         $this -> getActionTMDB();
         $this -> getAnimationTMDB();
     }
 
-
-    // -------使用方法---------
-    // 新しいジャンルを追加するときはURLのジャンルを変更すること
-    // クリエイト文のジャンルを任意のものに変更すること
+// -------使用方法---------
+// 新しいジャンルを追加するときはURLのジャンルを変更すること
+// クリエイト文のジャンルを任意のものに変更すること
     public function getActionTMDB(){
-        // 多すぎるので60秒だけ保存する
+        // 多すぎるので60秒間だけ保存する
         // 取得するときにURLにジャンルIDが含まれるので関数化ができない
         set_time_limit(60);
         $curl = curl_init();
@@ -36,11 +70,6 @@ class TestController extends Controller
         $err = curl_error($curl);
         curl_close($curl);
         $data = json_decode($response, true);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
-        }
 
         for($i=1; $i<=$data['total_pages']; $i++){
             $curl = curl_init();
@@ -73,7 +102,7 @@ class TestController extends Controller
     }
 
     public function getAnimationTMDB(){
-        // 多すぎるので60秒だけ保存する
+        // 多すぎるので60秒間だけ保存する
         // 取得するときにURLにジャンルIDが含まれるので関数化ができない
         set_time_limit(60);
         $curl = curl_init();
@@ -91,11 +120,6 @@ class TestController extends Controller
         $err = curl_error($curl);
         curl_close($curl);
         $data = json_decode($response, true);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
-        }
 
         for($i=1; $i<=$data['total_pages']; $i++){
             $curl = curl_init();
@@ -126,5 +150,5 @@ class TestController extends Controller
             }
         }
     }
-}
 
+}
