@@ -1,147 +1,130 @@
-<?php 
-while ($input_line = fgets(STDIN)) {
-    $tmp[] = trim($input_line);
-}
-$count = $tmp[0];
-
-// 指定回数繰り返し
-for ($i = 1; $i <= $count; $i++) {
-
-    $N = $tmp[$i];
-
-    // 約数を求める
-    $S = 0;
-    for ($divisor = 1; $divisor < $N; $divisor++) {
-        if ($N % $divisor === 0) {
-            $S += $divisor;
-        }
-    }
-
-}
-
-?>
-
 <?php
-    // 標準入力の取り出し
-    while ($input_line = fgets(STDIN)) {
-        $tmp[] = trim($input_line);
-    }
 
-    // 繰り返しの数を取得
-    $number = $tmp[0];
+namespace App\Http\Controllers;
 
-     // 3つストライクでアウト4つボールでフォアボール
-    $count_array = array_count_values($tmp);
-    
-    // $tmp = str_replace('ball', 'ball!', $tmp);
-    // $tmp = str_replace('strike', 'strike!', $tmp);
-    
-    $strike_count = 0;
-    $ball_count　 = 0;
-    for ($i = 1; $i <= $number; $i++) {
-        if ($tmp[$i] == 'strike') {
-            $strike_count++;
-            
-            if ($strike_count == 3) {
-                echo 'out!' . "\n";
-            } else {
-                echo 'strike!'. "\n";
-            }
-        }
+use Illuminate\Http\Request;
+use App\Movie;
 
-        if ($tmp[$i] == 'ball') {
-            $ball_count++;
-            if ($ball_count == 4) {
-                echo 'fourball!'. "\n";
-            } else {
-                echo 'ball!'. "\n";
-            }
-        }
+class TestController extends Controller
+{
+
+    public function getMovieData(){
+        $this -> getActionTMDB();
+        $this -> getAnimationTMDB();
     }
 
 
+    // -------使用方法---------
+    // 新しいジャンルを追加するときはURLのジャンルを変更すること
+    // クリエイト文のジャンルを任意のものに変更すること
+    public function getActionTMDB(){
+        // 多すぎるので60秒だけ保存する
+        // 取得するときにURLにジャンルIDが含まれるので関数化ができない
+        set_time_limit(60);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "{}",
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
 
-
-
-
-    while ($input_line = fgets(STDIN)) {
-        $tmp[] = trim($input_line);
-     }
-     
-     $instruction = $tmp[0];
-     
-     foreach ($tmp as $key => $value) {
-       $array[] = explode(" ", $value);
-     }
-     
-     $variable_1 = 0;
-     $variable_2 = 0;
- 
-     for ($i = 1; $i <= $instruction; $i++) {
-         
-         // SET i a : 変数 i に値 a を代入する (i = 1, 2)
-         if($array[$i][0] = "SET"){
-            if($array[$i][1] = 1){
-                $variable_1 = $array[$i][2];
-            } elseif ($array[$i][1] = 2) {
-                $variable_2 = $array[$i][2];
+        for($i=1; $i<=$data['total_pages']; $i++){
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "{}",
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            $movies = json_decode($response, true);
+            for ($s=0; $s <= 19; $s++) {
+                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
+                    Movie::create([
+                        'title' => $movies['results'][$s]['title'],
+                        'image_path' => $movies['results'][$s]['backdrop_path'],
+                        'summary' => $movies['results'][$s]['overview'],
+                        'genre' => 2,
+                        'TMDB_id' => $movies['results'][$s]['id'],
+                    ]);
+                }
             }
-         }
+        }
+    }
 
-         // ・ADD a :「変数 1 の値 + a」を計算し、計算結果を変数 2 に代入する
-         elseif($array[$i][0] = "ADD"){
-            $variable_2 = $variable_1 + $array[$i][1];
-         }
+    public function getAnimationTMDB(){
+        // 多すぎるので60秒だけ保存する
+        // 取得するときにURLにジャンルIDが含まれるので関数化ができない
+        set_time_limit(60);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=16&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "{}",
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
 
-         // ・SUB a :「変数 1 の値 - a」を計算し、計算結果を変数 2 に代入する
-         elseif($array[$i][0] = "SUB"){
-            $variable_2 = $variable_1 - $array[$i][1];
-         }
-          
-     }
-     
-     echo $variable_1 . " " . $variable_2;
+        for($i=1; $i<=$data['total_pages']; $i++){
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=16&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "{}",
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            $movies = json_decode($response, true);
+            for ($s=0; $s <= 19; $s++) {
+                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
+                    Movie::create([
+                        'title' => $movies['results'][$s]['title'],
+                        'image_path' => $movies['results'][$s]['backdrop_path'],
+                        'summary' => $movies['results'][$s]['overview'],
+                        'genre' => 1,
+                        'TMDB_id' => $movies['results'][$s]['id'],
+                    ]);
+                }
+            }
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

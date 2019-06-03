@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-sm-4">
             
-            <img class="img-thumbnail" src={{$movies->image_path}}>
+            <img class="img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$movies->image_path}}">
             
         </div>
         <div class="col-sm-8">
