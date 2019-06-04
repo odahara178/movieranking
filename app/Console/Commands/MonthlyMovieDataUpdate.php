@@ -39,7 +39,8 @@ class MonthlyMovieDataUpdate extends Command
      */
     public function handle()
     {
-        $ranking_delete = DB::table('movies')->truncate();
+        // シーディング結果が消えるので一旦コメントアウト
+        // $ranking_delete = DB::table('movies')->truncate();
         $this -> getMovieData();
     }
 
@@ -53,7 +54,6 @@ class MonthlyMovieDataUpdate extends Command
 // クリエイト文のジャンルを任意のものに変更すること
     public function getActionTMDB(){
         // 多すぎるので60秒間だけ保存する
-
         set_time_limit(60);
 
         $data = $this->getTMDB(28);

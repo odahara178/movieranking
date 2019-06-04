@@ -23,7 +23,7 @@
                 <div class="card">
                     <h5 class="card-title text-center pt-1" style="color: #646766;">{{$favorite->title}}</h5>
                     <a href="/detail/{{$favorite->movie_id}}">
-                    <img class="img-thumbnail" src={{$favorite->image_path}} alt="Card image cap" style="height: 220px; width: 170px;">
+                    <img class="img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$favorite->image_path}}" alt="Card image cap" style="height: 200px; width: 300px;">
                     </a>
                 </div>
             </div>

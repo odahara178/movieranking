@@ -5,25 +5,9 @@
 {{-- タイトル --}}
 <div class="container pt-5">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="">
             <h1 class="">{{$movies->title}}</h1>
             <h6>ジャンル:<a href='/ranking/{{$genre}}'>{{$genre}}</a></h6>
-        </div>
-        
-        <div class="col-sm-4">
-        @if ($is_favorite)
-        <form action="/favorite/delete/{{$movies->id}}" class="form" method="post">
-            @csrf
-            <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りを解除する</button>
-        </form>
-
-        @else
-            <form action="/favorite/{{$movies->id}}" class="form" method="post">
-                @csrf
-                <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りに追加</button>
-            </form>
-
-            @endif
         </div>
     </div>
 </div>
@@ -31,12 +15,24 @@
 {{-- あらすじ&レビュー --}}
 <div class="container mt-2">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             
             <img class="img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$movies->image_path}}">
-            
+            <div class="mt-4">
+                @if ($is_favorite)
+                    <form action="/favorite/delete/{{$movies->id}}" class="form" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りを解除する</button>
+                    </form>
+                @else
+                    <form action="/favorite/{{$movies->id}}" class="form" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-info" style="color:cornsilk;"><i class="fas fa-heart pr-1"></i>お気に入りに追加</button>
+                    </form>
+                @endif
+            </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-6">
             <div class="card">
                 <h6 class="card-header">あらすじ</h6>
                 <div class="card-body">
