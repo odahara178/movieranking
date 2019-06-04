@@ -73,7 +73,60 @@ class MovieController extends Controller
         $review = $this->getReviews($id);
         $average = $this->getAverage($id);
         $is_favorite = $this->isFavorite($id);
-        return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average', 'is_favorite'));
+
+        $related_movies = $this->relatedMovies($id);
+        $related_movies_array = $this->getRelatedMoviesId($related_movies);
+
+        return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average', 'is_favorite', 'related_movies', 'related_movies_array'));
+    }
+
+
+
+    private function relatedMovies($id){
+        $TMDB_id = DB::table('movies')->where('id', '=', $id)->first();
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.themoviedb.org/3/movie/$TMDB_id->TMDB_id/recommendations?page=1&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_POSTFIELDS => "{}",
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        }
+
+        $related_movies = json_decode($response, true);
+
+        return $related_movies;
+    }
+
+    private function getRelatedMoviesId($related_movies){
+        
+        $related_movies_array =[];
+        for ($i=0; $i <= 4; $i++) {
+            $related_movies_id = DB::table('movies')->where('TMDB_id', '=', $related_movies['results'][$i]['id'])->first();
+            // DBに保存しきれていないものはnullを返します。（ブラウザ上はid11に飛びます。）
+            if(isset($related_movies_id)){
+                $movie_data_id = $related_movies_id->id;
+            } else{
+                $movie_data_id = 11;
+            }
+            
+            array_push($related_movies_array, $movie_data_id);
+        }
+        
+        return $related_movies_array;
     }
     
     private function isFavorite($id){
