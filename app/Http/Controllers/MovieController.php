@@ -155,7 +155,7 @@ class MovieController extends Controller
             $movie_query->orderBy('updated_at', $sort);
         }
 
-        $movies = $movie_query->get();
+        $movies = $movie_query->paginate(5);
 
         return view('movie.search', compact('movies', 'keyword'));
     }
