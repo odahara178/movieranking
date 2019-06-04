@@ -17,7 +17,7 @@ Auth::routes();
 // Route::get('/test', 'TestController@getMovieData');
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 // MovieRanking Route
 Route::get('/', 'MovieController@index');
