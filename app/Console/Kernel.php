@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\DailyRankingUpdate;
 use App\Console\Commands\MonthlyMovieDataUpdate;
+use App\Console\Commands\DailyRecommendedUpdate;
 
 
 class Kernel extends ConsoleKernel
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         DailyRankingUpdate::class,
+        DailyRecommendedUpdate::class,
         MonthlyMovieDataUpdate::class,
     ];
 
@@ -29,7 +31,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('daily:rankingUpdate')->daily();
-        // 最終的には月々にするが、ポートフォリオとして使用する為、一旦1年毎に設定
+        $schedule->command('daily:recommendedUpdate')->daily();
+        // ↓最終的には月々にするが、ポートフォリオとして使用する為、一旦1年毎に設定
         $schedule->command('monthly:moviedataupdate')->yearly();
     }
 
