@@ -65,7 +65,6 @@ class MovieController extends Controller
         return $animation_ranks;
     }
 
-
     public function detail($id){
         $movies = Movie::find($id);
         $genre = $this->getGenres($movies->genre);
@@ -77,10 +76,11 @@ class MovieController extends Controller
         $related_movies = $this->relatedMovies($id);
         $related_movies_array = $this->getRelatedMoviesId($related_movies);
 
+        // $related_movies_array = $this->isRelatedMovie($related_movies);
+        // $popularity_movies = $this->getPopularityMovies();
+        
         return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average', 'is_favorite', 'related_movies', 'related_movies_array'));
     }
-
-
 
     private function relatedMovies($id){
         $TMDB_id = DB::table('movies')->where('id', '=', $id)->first();
@@ -96,46 +96,44 @@ class MovieController extends Controller
           CURLOPT_CUSTOMREQUEST => "GET",
           CURLOPT_POSTFIELDS => "{}",
         ));
-        
         $response = curl_exec($curl);
         $err = curl_error($curl);
-        
         curl_close($curl);
-        
         if ($err) {
           echo "cURL Error #:" . $err;
         }
-
-        $related_movies = json_decode($response, true);
+            $related_movies = json_decode($response, true);
 
         return $related_movies;
     }
 
     private function getRelatedMoviesId($related_movies){
         
-        $related_movies_array =[];
-        for ($i=0; $i <= 4; $i++) {
-            $related_movies_id = DB::table('movies')->where('TMDB_id', '=', $related_movies['results'][$i]['id'])->first();
-            // DBに保存しきれていないものはnullを返します。（ブラウザ上はid11に飛びます。）
-            if(isset($related_movies_id)){
-                $movie_data_id = $related_movies_id->id;
-            } else{
-                $movie_data_id = 11;
-            }
-            
-            array_push($related_movies_array, $movie_data_id);
+        if ($related_movies['total_results'] >= 4) {
+            $count = 4;
+        } else {
+            $count = $related_movies['total_results'];
         }
-        
+            $related_movies_array =[];
+            for ($i=0; $i < $count; $i++) {
+                $related_movies_id = DB::table('movies')->where('TMDB_id', '=', $related_movies['results'][$i]['id'])->first();
+                // DBに保存されていない場合はnullを返します。（ブラウザ上はid11に飛びます。）
+                if(isset($related_movies_id)){
+                    $movie_data_id = $related_movies_id->id;
+                } else{
+                    $movie_data_id = 11;
+                }
+                array_push($related_movies_array, $movie_data_id);
+            }
         return $related_movies_array;
     }
-    
+
     private function isFavorite($id){
         $user_id =Auth::id();
         $favorite_count = DB::table('favorites')
         ->where('user_id', '=', $user_id)
         ->where('movie_id', '=', $id)
         ->count();
-
         if ($favorite_count === 1){
             return true;
         } else {
@@ -191,25 +189,17 @@ class MovieController extends Controller
     {
         $keyword = $request->input('keyword');
         $sort = $request->sort;
-
         if(!empty($keyword)){
-
             $movie_query = DB::table('movies')
             ->where('title', 'like', '%' . $keyword . '%')
             ->orWhere('summary', 'like', '%' . $keyword . '%');
-
         } else{
-
             $movie_query = DB::table('movies');
-
         }
-
         if ($sort) {
             $movie_query->orderBy('updated_at', $sort);
         }
-
         $movies = $movie_query->paginate(5);
-
         return view('movie.search', compact('movies', 'keyword'));
     }
 

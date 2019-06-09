@@ -5,126 +5,89 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Movie;
 
+use Illuminate\Support\Facades\DB;
+use App\Recommended;
+use Illuminate\Support\Facades\Auth;
+
 class TestController extends Controller
 {
+    public function searchRecommended(){
 
-    public function getMovieData(){
-        $this -> getActionTMDB();
-        $this -> getAnimationTMDB();
+    // 1. マッチ度が近いユーザーIDを取得
+    $match_id = $this->getMostMatchId();
+
+    // 2. マッチ度が近いユーザーのお気に入りを取得
+    // 3. 自分がお気に入りにしているデータ以外を取得
+    $match_favorites = $this->getMostMatchFavorite($match_id);
+
+    // 4.映画の情報を取得
+    $recommended_movies = $this->getMovieData($match_favorites);
+dd($recommended_movies[1]->title);
+    // return view('movie.mypage', compact('recommended_movies'));
     }
 
+    private function getMostMatchId() {
+        $logged_in_user_id = Auth::id();
 
-    // -------使用方法---------
-    // 新しいジャンルを追加するときはURLのジャンルを変更すること
-    // クリエイト文のジャンルを任意のものに変更すること
-    public function getActionTMDB(){
-        // 多すぎるので60秒だけ保存する
-        // 取得するときにURLにジャンルIDが含まれるので関数化ができない
-        set_time_limit(60);
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_POSTFIELDS => "{}",
-        ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        $data = json_decode($response, true);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
+        // 自分のデータを取得する。
+        $my_recommended_data = DB::table('recommendeds')->where('user_id', $logged_in_user_id)->first();
+
+        // 一番お気に入りしているカラムを取得
+        $max_col = 1;
+        for ($i=2; $i <= 14 ; $i++) {
+            if ($my_recommended_data->$max_col < $my_recommended_data->$i) {
+                $max_col = $i;
+            }
         }
 
-        for($i=1; $i<=$data['total_pages']; $i++){
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_POSTFIELDS => "{}",
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            curl_close($curl);
-            $movies = json_decode($response, true);
-            for ($s=0; $s <= 19; $s++) {
-                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
-                    Movie::create([
-                        'title' => $movies['results'][$s]['title'],
-                        'image_path' => $movies['results'][$s]['backdrop_path'],
-                        'summary' => $movies['results'][$s]['overview'],
-                        'genre' => 2,
-                        'TMDB_id' => $movies['results'][$s]['id'],
-                    ]);
-                }
+        // お気に入り度を取得
+        $max_value = $my_recommended_data->$max_col;
+
+        // マッチするデータを取得
+        for ($i=5; $i <= 100; $i += 5) {
+            $match_data = DB::table('recommendeds')
+                        ->where('user_id', '!=', $logged_in_user_id)
+                        ->where($max_col, '>=', $max_value - $i)
+                        ->where($max_col, '<=', $max_value + $i)
+                        ->first();
+            if (isset($match_data)) {
+                return $match_data->user_id;
             }
         }
     }
 
-    public function getAnimationTMDB(){
-        // 多すぎるので60秒だけ保存する
-        // 取得するときにURLにジャンルIDが含まれるので関数化ができない
-        set_time_limit(60);
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=16&page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_POSTFIELDS => "{}",
-        ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        $data = json_decode($response, true);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
+    private function getMostMatchFavorite($match_id) {
+        $logged_in_user_id = Auth::id();
+        $most_match_query = DB::table('favorites')->where('user_id', $match_id);
+
+        $my_favorites = DB::table('favorites')->where('user_id', $logged_in_user_id)->get();
+        // 自分がお気に入りにしていない映画を取得
+        foreach($my_favorites as $my_favorite) {
+            $most_match_query->where('movie_id', '!=', $my_favorite->movie_id);
+        }
+        $most_match_favorites = $most_match_query->get();
+        return $most_match_favorites;
+    }
+
+    private function getMovieData($match_favorites){
+        $movie_number = count($match_favorites);
+        $recommended_movie_query = DB::table('movies');
+
+        for ($i=0; $i < $movie_number; $i++) {
+            $recommended_movie_query->orWhere('id', '=', $match_favorites[$i]->movie_id);
         }
 
-        for($i=1; $i<=$data['total_pages']; $i++){
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=16&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_POSTFIELDS => "{}",
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            curl_close($curl);
-            $movies = json_decode($response, true);
-            for ($s=0; $s <= 19; $s++) {
-                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
-                    Movie::create([
-                        'title' => $movies['results'][$s]['title'],
-                        'image_path' => $movies['results'][$s]['backdrop_path'],
-                        'summary' => $movies['results'][$s]['overview'],
-                        'genre' => 1,
-                        'TMDB_id' => $movies['results'][$s]['id'],
-                    ]);
-                }
-            }
-        }
+        $recommended_movies = $recommended_movie_query->get();
+        return $recommended_movies;
     }
+
+
+
+
+
+
+
+
+
 }
 

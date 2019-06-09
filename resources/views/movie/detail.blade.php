@@ -62,41 +62,39 @@
     </div>
 </div>
     {{-- 動画表示 --}}
-
-    <div class="container mt-4">      
-            <h5 class="p-1 text-center rounded bg-dark text-white">関連動画(YouTube)</h5>
-        <div class="card-group">           
-            @foreach ($urls as $url)
-                <div class="card">
-                    <iframe width="auto" height="auto" src="{{$url->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  
-                </div>
-            @endforeach
-        </div>
+<div class="container mt-4">      
+        <h5 class="p-1 text-center rounded bg-dark text-white">関連動画(YouTube)</h5>
+    <div class="card-group">
+        @foreach ($urls as $url)
+            <div class="card">
+                <iframe width="auto" height="auto" src="{{$url->url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  
+            </div>
+        @endforeach
     </div>
+</div>
 
 
         {{-- 関連作品表示 --}}
     <div class="container my-3">
         <h5 class="p-1 text-center rounded bg-dark text-white">関連作品</h5>
-        
-
-                <div class="carousel-item active">
-                    <div class="card-group" alt="First slide">
-                        @for ($i = 0; $i <= 4; $i++)
-                            <div class="card">
-                                <a href="{{$related_movies_array[$i]}}">
-                                <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{$related_movies['results'][$i]['poster_path']}}" alt="Card image cap" style="height: 300px;">
-                                </a>
-                                <div class="card-footer">
-                                    <small class="text-muted">{{str_limit($related_movies['results'][$i]['title'], 20)}}</small>
-                                </div>
-                            </div>
-                        @endfor
+        <div class="row">
+            
+            @foreach ($related_movies_array as $i => $related_movies_id)
+                <div class="col-md-3">
+                    <div class="card">
+                        <a href="{{$related_movies_id}}">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{$related_movies['results'][$i]['poster_path']}}" alt="Card image cap" style="height: 300px;">
+                        </a>
+                        <div class="card-footer">
+                            <small class="text-muted">{{str_limit($related_movies['results'][$i]['title'], 20)}}</small>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-
-    </div>
+            @endforeach
+            
+        </div>
+        <div class="card-group">
+            
+        </div>
 
 @endsection
