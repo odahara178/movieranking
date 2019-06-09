@@ -17,7 +17,7 @@ Auth::routes();
 // Route::get('/test', 'TestController@getMovieData');
 
 // お気に入り機能テスト用
-Route::get('/test', 'TestController@searchRecommended');
+// Route::get('/test', 'TestController@getMovieData');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -38,5 +38,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/review/{id}', 'ReviewController@create');
     Route::post('/favorite/{id}', 'FavoriteController@store');
     Route::get('/mypage/rankingupdate', 'MypageController@rankingUpdate');
+    Route::post('/mypage/rankingupdate', 'MypageController@rankingChange');
 });
 

@@ -4,30 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class MypageController extends Controller
 {
     public function index() {
-        $user = Auth::user()
-            ->join('movies as movies_1', 'movies_1.id', '=', 'users.ranking_1')
-            ->join('movies as movies_2', 'movies_2.id', '=', 'users.ranking_2')
-            ->join('movies as movies_3', 'movies_3.id', '=', 'users.ranking_3')
-            ->select('movies_1.title as movies_1_title', 'movies_2.title as movies_2_title', 'movies_3.title as movies_3_title', 
-            'movies_1.image_path as movies_1_image_path', 'movies_2.image_path as movies_2_image_path', 'movies_3.image_path as movies_3_image_path')
-            ->first();
-            $recommended_movies = $this->searchRecommended();
-            $count_recommended_movies = count($recommended_movies);
+        $user = $this->getMyranking();
+        $recommended_movies = $this->searchRecommended();
+        $count_recommended_movies = $this->judgeCountMovie($recommended_movies);
         return view('movie.mypage',compact('user', 'recommended_movies', 'count_recommended_movies'));
     }
 
-    public function mb_strimlen($str, $start, $length, $trimmarker = '', $encoding = false) {
-        $encoding = $encoding ? $encoding : mb_internal_encoding();
-        $str = mb_substr($str, $start, mb_strlen($str), $encoding);
-        if (mb_strlen($str, $encoding) > $length) {
-            $markerlen = mb_strlen($trimmarker, $encoding);
-            $str = mb_substr($str, 0, $length - $markerlen, $encoding) . $trimmarker;
-        }
-        return $str;
+    public function getMyranking(){
+        $user_id = Auth::id();
+        $user = Auth::user()
+        ->join('movies as movies_1', 'movies_1.id', '=', 'users.ranking_1')
+        ->join('movies as movies_2', 'movies_2.id', '=', 'users.ranking_2')
+        ->join('movies as movies_3', 'movies_3.id', '=', 'users.ranking_3')
+        ->where('users.id', '=', $user_id)
+        ->select('movies_1.title as movies_1_title', 'movies_2.title as movies_2_title', 'movies_3.title as movies_3_title', 
+        'movies_1.image_path as movies_1_image_path', 'movies_2.image_path as movies_2_image_path', 'movies_3.image_path as movies_3_image_path', 'movies_1.id as movies_1_id', 'movies_2.id as movies_2_id', 'movies_3.id as movies_3_id')
+        ->first();
+        return $user;
     }
 
     public function myFavorite(){
@@ -47,7 +45,17 @@ class MypageController extends Controller
         ->where('user_id', $user_id)
         ->select('movie_id', 'title' , 'image_path')
         ->get();
-        return view('movie.update', compact('favorites'));
+
+        $my_ranking = $this->getMyranking();
+        return view('movie.update', compact('favorites', 'my_ranking'));
+    }
+
+    public function rankingChange(Request $request){
+        $ranking_data = $request->all();
+        $user_id = Auth::id();
+        // 1.取得したリクエストを使用しuserテーブルのrankingカラムを更新する
+        DB::table('users')->where('id', $user_id)->update(['ranking_1' => $ranking_data['movie_id_1'], 'ranking_2' => $ranking_data['movie_id_2'], 'ranking_3' => $ranking_data['movie_id_3']]);
+        return redirect()->back()->withInput();
     }
 
     public function searchRecommended(){
@@ -120,6 +128,13 @@ class MypageController extends Controller
         return $recommended_movies;
     }
 
+    private function judgeCountMovie($recommended_movies){
+        $count_recommended_movies = count($recommended_movies);
+        if($count_recommended_movies > 4){
+            $count_recommended_movies = 4;
+        }
+        return $count_recommended_movies;
+    }
 
 
 

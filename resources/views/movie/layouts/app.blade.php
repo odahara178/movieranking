@@ -132,12 +132,12 @@
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="/">TOP</a>
-                        </li> 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ranking/0">ランキング</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/mypage">マイページ</a>
-                        </li>        
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ranking">ランキング</a>
                         </li>
                     </ul>
 

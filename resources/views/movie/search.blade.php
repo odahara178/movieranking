@@ -10,7 +10,7 @@
     <div class="search_result border-bottom py-3">
         <div class="media">           
             <a class="media-left mr-3" href="/movie/detail/{{$movie->id}}">
-                <img class="img-thumbnail card-img-top mx-auto d-block" src="https://image.tmdb.org/t/p/w500{{$movie->image_path}}" alt="Card image cap" style="height: 350px; width: 500px;">
+                <img class="img-thumbnail card-img-top mx-auto d-block" src="https://image.tmdb.org/t/p/w500{{$movie->image_path}}" alt="Card image cap" style="height: 350px; width: 300px;">
             </a>           
             <div class="media-body">
                 <h4 class="media-heading d-inline border-left border-warning">{{$movie->title}}</h4>

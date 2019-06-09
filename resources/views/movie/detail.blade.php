@@ -1,7 +1,6 @@
 @extends('movie.layouts.app')
 
 @section('content')
-<h1>映画詳細</h1>
 {{-- タイトル --}}
 <div class="container pt-5">
     <div class="row">

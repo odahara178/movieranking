@@ -1,7 +1,6 @@
 @extends('movie.layouts.app')
 
 @section('content')
-<h1>TOPページ</h1>
 
 {{-- 2ジャンル毎にコンテナを作成する --}}
 <div class="container">

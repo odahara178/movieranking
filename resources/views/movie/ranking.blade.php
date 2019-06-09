@@ -33,7 +33,7 @@
             <div class="card col-3">
                 <h4 class="card-title mt-2" style="color: #ADA142;"><i class="fas fa-crown"></i>{{$all_rank->rank}}位</h4>
                 <a href="/movie/detail/{{$all_rank->movie_id}}">
-                    <img class="card-img-top img-thumbnail" src={{$all_rank->image_path}} alt="Card image cap" style="height: 300px; width: 280px;">
+                    <img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$all_rank->image_path}}" alt="Card image cap" style="height: 300px; width: 280px;">
                 </a>
                 <div class="card-body">
                     <p class="card-text">{{$all_rank->title}}</p>

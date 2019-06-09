@@ -1,12 +1,8 @@
 @extends('movie.layouts.app')
 
 @section('content')
-<h1>レビュー投稿ページ</h1>
-
     <div class="container pb-2">
-
     <hr>
-
         @foreach ($reviews as $review)
             <div class="review border-bottom py-3">
                 <table>
@@ -23,7 +19,7 @@
             </div>
         @endforeach
     </div>
-    
+
     <div class="container mt-4">
         {{-- 投稿フォーム --}}
         <div class="posted_form">
@@ -40,7 +36,7 @@
                     </select>
                 </div>
 
-                <br>
+    <br>
 
                 <textarea class="mt-1" name="content" cols="60" rows="10"></textarea>
             </form>
@@ -56,12 +52,5 @@
             </ul>
         </div>
     @endif
-
-
-
-
-
-
-
 
 @endsection

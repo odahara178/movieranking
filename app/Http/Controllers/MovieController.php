@@ -19,8 +19,6 @@ class MovieController extends Controller
         $action_ranks = $this->getActionRank();
         $mystery_ranks = $this->getMysteryRank();
 
-
-
         return view('movie.top',compact('all_ranks', 'animation_ranks', 'action_ranks', 'mystery_ranks'));
     }
 
@@ -76,9 +74,6 @@ class MovieController extends Controller
         $related_movies = $this->relatedMovies($id);
         $related_movies_array = $this->getRelatedMoviesId($related_movies);
 
-        // $related_movies_array = $this->isRelatedMovie($related_movies);
-        // $popularity_movies = $this->getPopularityMovies();
-        
         return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average', 'is_favorite', 'related_movies', 'related_movies_array'));
     }
 

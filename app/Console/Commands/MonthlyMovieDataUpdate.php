@@ -47,6 +47,7 @@ class MonthlyMovieDataUpdate extends Command
     public function getMovieData(){
         $this -> getActionTMDB();
         $this -> getAnimationTMDB();
+        $this -> getMysteryTMDB();
     }
 
 // -------使用方法---------
@@ -55,9 +56,7 @@ class MonthlyMovieDataUpdate extends Command
     public function getActionTMDB(){
         // 多すぎるので60秒間だけ保存する
         set_time_limit(60);
-
         $data = $this->getTMDB(28);
-
         for($i=1; $i<=$data['total_pages']; $i++){
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -75,12 +74,12 @@ class MonthlyMovieDataUpdate extends Command
             curl_close($curl);
             $movies = json_decode($response, true);
             for ($s=0; $s <= 19; $s++) {
-                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
+                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['poster_path'])){
                     $movie = Movie::where('TMDB_id', $movies['results'][$s]['id'])->first();
                     if (is_null($movie)) {
                         Movie::create([
                             'title' => $movies['results'][$s]['title'],
-                            'image_path' => $movies['results'][$s]['backdrop_path'],
+                            'image_path' => $movies['results'][$s]['poster_path'],
                             'summary' => $movies['results'][$s]['overview'],
                             'genre' => 2,
                             'TMDB_id' => $movies['results'][$s]['id'],
@@ -94,9 +93,7 @@ class MonthlyMovieDataUpdate extends Command
     public function getAnimationTMDB(){
         // 多すぎるので60秒間だけ保存する
         set_time_limit(60);
-
         $data = $this->getTMDB(16);
-
         for($i=1; $i<=$data['total_pages']; $i++){
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -114,12 +111,12 @@ class MonthlyMovieDataUpdate extends Command
             curl_close($curl);
             $movies = json_decode($response, true);
             for ($s=0; $s <= 19; $s++) {
-                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['backdrop_path'])){
+                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['poster_path'])){
                     $movie = Movie::where('TMDB_id', $movies['results'][$s]['id'])->first();
                     if (is_null($movie)) {
                         Movie::create([
                             'title' => $movies['results'][$s]['title'],
-                            'image_path' => $movies['results'][$s]['backdrop_path'],
+                            'image_path' => $movies['results'][$s]['poster_path'],
                             'summary' => $movies['results'][$s]['overview'],
                             'genre' => 1,
                             'TMDB_id' => $movies['results'][$s]['id'],
@@ -129,6 +126,44 @@ class MonthlyMovieDataUpdate extends Command
             }
         }
     }
+
+    public function getMysteryTMDB(){
+        // 多すぎるので60秒間だけ保存する
+        set_time_limit(60);
+        $data = $this->getTMDB(9648);
+        for($i=1; $i<=$data['total_pages']; $i++){
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "{}",
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            $movies = json_decode($response, true);
+            for ($s=0; $s <= 19; $s++) {
+                if(!empty($movies['results'][$s]['overview']) && !empty($movies['results'][$s]['poster_path'])){
+                    $movie = Movie::where('TMDB_id', $movies['results'][$s]['id'])->first();
+                    if (is_null($movie)) {
+                        Movie::create([
+                            'title' => $movies['results'][$s]['title'],
+                            'image_path' => $movies['results'][$s]['poster_path'],
+                            'summary' => $movies['results'][$s]['overview'],
+                            'genre' => 3,
+                            'TMDB_id' => $movies['results'][$s]['id'],
+                        ]);
+                    }
+                }
+            }
+        }
+    }
+
 
     // ジャンルの映画データ取得メソッド
     public function getTMDB($genre){
