@@ -39,8 +39,7 @@ class MonthlyMovieDataUpdate extends Command
      */
     public function handle()
     {
-        // シーディング結果が消えるので一旦コメントアウト
-        // $ranking_delete = DB::table('movies')->truncate();
+        $ranking_delete = DB::table('movies')->truncate();
         $this -> getMovieData();
     }
 
@@ -134,7 +133,7 @@ class MonthlyMovieDataUpdate extends Command
         for($i=1; $i<=$data['total_pages']; $i++){
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=28&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
+                CURLOPT_URL => "https://api.themoviedb.org/3/discover/movie?with_genres=9648&page=$i&include_video=false&include_adult=false&sort_by=popularity.desc&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,

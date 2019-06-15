@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class MypageController extends Controller
 {
-    public function index() {
+    public function index(){
         $user = $this->getMyranking();
         $recommended_movies = $this->searchRecommended();
         $count_recommended_movies = $this->judgeCountMovie($recommended_movies);
@@ -73,7 +73,7 @@ class MypageController extends Controller
         return $recommended_movies;
     }
     
-    private function getMostMatchId() {
+    private function getMostMatchId(){
         $logged_in_user_id = Auth::id();
 
         // 自分のデータを取得する。
@@ -103,7 +103,7 @@ class MypageController extends Controller
         }
     }
 
-    private function getMostMatchFavorite($match_id) {
+    private function getMostMatchFavorite($match_id){
         $logged_in_user_id = Auth::id();
         $most_match_query = DB::table('favorites')->where('user_id', $match_id);
 
@@ -135,11 +135,5 @@ class MypageController extends Controller
         }
         return $count_recommended_movies;
     }
-
-
-
-
-
-
 
 }

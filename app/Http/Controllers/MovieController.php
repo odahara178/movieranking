@@ -65,22 +65,19 @@ class MovieController extends Controller
 
     public function detail($id){
         $movies = Movie::find($id);
-        $genre = $this->getGenres($movies->genre);
+        $genre = $movies->genre;
         $urls = $this->getUrls($id);
         $review = $this->getReviews($id);
         $average = $this->getAverage($id);
         $is_favorite = $this->isFavorite($id);
-
         $related_movies = $this->relatedMovies($id);
         $related_movies_array = $this->getRelatedMoviesId($related_movies);
-
         return view('movie.detail', compact('movies', 'genre', 'urls', 'review', 'average', 'is_favorite', 'related_movies', 'related_movies_array'));
     }
 
     private function relatedMovies($id){
         $TMDB_id = DB::table('movies')->where('id', '=', $id)->first();
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
           CURLOPT_URL => "https://api.themoviedb.org/3/movie/$TMDB_id->TMDB_id/recommendations?page=1&language=ja-JP&api_key=8317fd2cf95f8cfdab818c2176596268",
           CURLOPT_RETURNTRANSFER => true,
@@ -98,12 +95,10 @@ class MovieController extends Controller
           echo "cURL Error #:" . $err;
         }
             $related_movies = json_decode($response, true);
-
         return $related_movies;
     }
 
     private function getRelatedMoviesId($related_movies){
-        
         if ($related_movies['total_results'] >= 4) {
             $count = 4;
         } else {
@@ -158,12 +153,6 @@ class MovieController extends Controller
         return $average;
     }
 
-    private function getGenres($id){
-        $genres = Config::get('genres');
-        $genre = $genres[$id];
-        return $genre;
-    }
-
     private function getUrls($id){
         $urls = DB::table('related_videos')
         ->where('movie_id', '=', $id)
@@ -180,8 +169,7 @@ class MovieController extends Controller
         return $review;
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $keyword = $request->input('keyword');
         $sort = $request->sort;
         if(!empty($keyword)){

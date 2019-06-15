@@ -13,12 +13,6 @@
 
 Auth::routes();
 
-// API使用テスト用
-// Route::get('/test', 'TestController@getMovieData');
-
-// お気に入り機能テスト用
-// Route::get('/test', 'TestController@getMovieData');
-
 
 Route::get('/home', 'HomeController@index')->name('home');
 

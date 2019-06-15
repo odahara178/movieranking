@@ -11,8 +11,6 @@ class ReviewController extends Controller
 {
     public function index($id)
     {
-        // $reviews = Review::where('movie_id', $id)
-        // -> get();
 
         $reviews = DB::table('reviews')
         ->join('users', 'reviews.user_id', '=', 'users.id')
@@ -37,9 +35,7 @@ class ReviewController extends Controller
         $review->save();
 
         return redirect()->back()->withInput();
-
     }
-
 
 
 }

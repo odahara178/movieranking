@@ -9,16 +9,9 @@ use App\Ranking;
 
 class RankingController extends Controller
 {
-    public function index($id)
-    {
+    public function index($id){
         $genres = Config::get('genres');
         $all_ranks = $this->getAllRank($id);
-        
-        // DBへデータ挿入用
-        // $this -> insertAllRankings();
-        // $this -> insertAnimetionRankings();
-        // $this -> insertActionRankings();
-        // $this -> insertMysteryRankings();
 
         return view('movie.ranking', compact('genres', 'all_ranks'));
     }
@@ -106,7 +99,7 @@ private function getAllRank($id){
         }
     }
 
-// 映画毎に合計評価を算出
+    // 映画毎に合計評価を算出
     public function getEvaluation($reviews){
 
         $evaluations = [];

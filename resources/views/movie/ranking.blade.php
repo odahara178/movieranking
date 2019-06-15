@@ -1,7 +1,7 @@
 @extends('movie.layouts.app')
 
 @section('content')
-<h1>ランキングページ</h1>
+
 <div class="container mt-1">
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

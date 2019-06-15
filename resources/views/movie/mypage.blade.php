@@ -21,10 +21,6 @@
 
         <div class="col-md-7">
             {{-- ページ遷移ボタン --}}
-            <div class="container my-3 d-flex justify-content-around">
-                <a class="btn btn-secondary" href='mypage/myfavorite'>お気に入りページ</a>
-                <a class="btn btn-secondary" href='/mypage/rankingupdate'>ランキング更新</a>
-            </div>
             <div class="card-deck">
                 <div class="card">
                     <div class="card-header">
@@ -45,6 +41,10 @@
                     </a>
                 </div>
             </div>
+            <div class="container mt-3 d-flex justify-content-around">
+                <a class="btn btn-secondary" href='mypage/myfavorite'>お気に入りページ</a>
+                <a class="btn btn-secondary" href='/mypage/rankingupdate'>ランキング更新</a>
+            </div>
         </div>
     </div>
 
@@ -56,7 +56,7 @@
                 <div class="col-md-3 mt-2">
                     <div class="card">
                         <a href="/movie/detail/{{$recommended_movies[$i]->id}}">
-                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{$recommended_movies[$i]->image_path}}" alt="Card image cap" style="height: 250px;">
+                        <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{$recommended_movies[$i]->image_path}}" alt="Card image cap" style="height: 300px;">
                         </a>
                         <div class="card-footer">
                             <small class="text-muted">{{str_limit($recommended_movies[$i]->title, 27)}}</small>
