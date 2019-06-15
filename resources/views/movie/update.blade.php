@@ -7,19 +7,19 @@
         <div class="card">
                 <h5 class="card-title" style="color: #ADA142;"><i class="fas fa-crown"></i>1位</h5>
                 <h5>{{str_limit($my_ranking->movies_1_title, 28)}}</h5>
-            <a href="movie/detail/{{$my_ranking->movies_1_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_1_image_path}}" style="height: 450px;"></a>
+            <a href="/movie/detail/{{$my_ranking->movies_1_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_1_image_path}}" style="height: 450px;"></a>
         </div>
 
         <div class="card">
             <h5 class="card-title" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位</h5>
             <h5>{{str_limit($my_ranking->movies_2_title, 28)}}</h5>
-            <a href="movie/detail/{{$my_ranking->movies_2_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_2_image_path}}" style="height: 450px;"></a>
+            <a href="/movie/detail/{{$my_ranking->movies_2_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_2_image_path}}" style="height: 450px;"></a>
         </div>
 
         <div class="card">
             <h5 class="card-title" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位</h5>
             <h5>{{str_limit($my_ranking->movies_3_title, 28)}}</h5>
-            <a href="movie/detail/{{$my_ranking->movies_3_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_3_image_path}}" style="height: 450px;"></a>
+            <a href="/movie/detail/{{$my_ranking->movies_3_id}}" class="href"><img class="card-img-top img-thumbnail" src="https://image.tmdb.org/t/p/w500{{$my_ranking->movies_3_image_path}}" style="height: 450px;"></a>
         </div>
     </div>
 
