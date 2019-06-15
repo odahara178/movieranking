@@ -53,7 +53,7 @@
                     
                     <div class="text-center">
                         <a href="/review/{{$movies->id}}" class="btn btn-secondary">レビューをもっと見る・投稿する</a>
-                    </div>              
+                    </div>
                 </div>
             </div>
         </div>

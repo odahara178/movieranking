@@ -1,19 +1,6 @@
 @extends('movie.layouts.app')
 
 @section('content')
-{{-- 一旦削除 --}}
-{{-- <div class="container mt-1">
-    <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            全ジャンル
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">アニメ</button>
-            <button class="dropdown-item" type="button">アクション</button>
-            <button class="dropdown-item" type="button">ミステリー</button>
-        </div>
-    </div>
-</div> --}}
 
 <div class="container mt-2">
         <div class="row">

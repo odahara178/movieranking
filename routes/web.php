@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('mypage/myfavorite', 'MypageController@myFavorite');
     Route::post('/review/{id}', 'ReviewController@create');
     Route::post('/favorite/{id}', 'FavoriteController@store');
+    Route::post('/favorite/delete/{id}', 'FavoriteController@delete');
     Route::get('/mypage/rankingupdate', 'MypageController@rankingUpdate');
     Route::post('/mypage/rankingupdate', 'MypageController@rankingChange');
 });

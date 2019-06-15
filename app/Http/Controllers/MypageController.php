@@ -10,8 +10,13 @@ class MypageController extends Controller
 {
     public function index(){
         $user = $this->getMyranking();
-        $recommended_movies = $this->searchRecommended();
-        $count_recommended_movies = $this->judgeCountMovie($recommended_movies);
+        if(isset($user)){
+            $recommended_movies = $this->searchRecommended();
+            $count_recommended_movies = $this->judgeCountMovie($recommended_movies);
+        } else{
+            $recommended_movies = "オススメはありません";
+            $count_recommended_movies = "オススメはありません";
+        }
         return view('movie.mypage',compact('user', 'recommended_movies', 'count_recommended_movies'));
     }
 
