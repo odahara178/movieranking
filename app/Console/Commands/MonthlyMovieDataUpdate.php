@@ -44,9 +44,9 @@ class MonthlyMovieDataUpdate extends Command
     }
 
     public function getMovieData(){
-        $this -> getActionTMDB();
+        // $this -> getActionTMDB();
         // $this -> getAnimationTMDB();
-        // $this -> getMysteryTMDB();
+        $this -> getMysteryTMDB();
     }
 
 // -------使用方法---------
