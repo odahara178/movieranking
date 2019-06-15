@@ -39,14 +39,14 @@ class MonthlyMovieDataUpdate extends Command
      */
     public function handle()
     {
-        $ranking_delete = DB::table('movies')->truncate();
+        // $ranking_delete = DB::table('movies')->truncate();
         $this -> getMovieData();
     }
 
     public function getMovieData(){
-        // $this -> getActionTMDB();
-        $this -> getAnimationTMDB();
-        $this -> getMysteryTMDB();
+        $this -> getActionTMDB();
+        // $this -> getAnimationTMDB();
+        // $this -> getMysteryTMDB();
     }
 
 // -------使用方法---------
