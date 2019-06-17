@@ -13,7 +13,7 @@
                             <h5 class="" style="color: #ADA142;"><i class="fas fa-crown"></i>1位: <a href="/movie/detail/{{$user->movies_1_id}}" class="h6">{{str_limit($user->movies_1_title, 24)}}</a></h5>
                         </div>
                         <a href="/movie/detail/{{$user->movies_1_id}}" class="href">
-                            <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_1_image_path}}">
+                            <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_1_image_path}}" style="height: 490px;">
                         </a>
                     @else
                         <div class="card-header">
@@ -21,7 +21,7 @@
                             <h5>作品を選んでください</h5>
                         </div>
                         <a href="" class="href">
-                            <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 380px;">
+                            <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 490px;">
                         </a>
                     @endif
                 
@@ -34,7 +34,7 @@
                         <h5 class="" style="color: #9C9C9C;"><i class="fas fa-crown"></i>2位: <a href="/movie/detail/{{$user->movies_2_id}}" class="h6">{{str_limit($user->movies_2_title, 24)}}</a></h5>
                     </div>
                     <a href="/movie/detail/{{$user->movies_2_id}}" class="href">
-                        <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_2_image_path}}">
+                        <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_2_image_path}}" style="height: 490px;">
                     </a>
                 @else
                     <div class="card-header">
@@ -42,7 +42,7 @@
                         <h6>作品を選んでください</h6>
                     </div>
                     <a href="" class="href">
-                        <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 380px;">
+                        <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 490px;">
                     </a>
                 @endif
             </div>
@@ -54,7 +54,7 @@
                         <h5 class="" style="color: #AB7C45;"><i class="fas fa-crown"></i>3位: <a href="/movie/detail/{{$user->movies_2_id}}" class="h6">{{str_limit($user->movies_3_title, 24)}}</a></h5>
                     </div>
                     <a href="/movie/detail/{{$user->movies_2_id}}" class="href">
-                        <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_3_image_path}}">
+                        <img class="img-thumbnail card-img-bottom" src="https://image.tmdb.org/t/p/w500{{$user->movies_3_image_path}}" style="height: 490px;">
                     </a>
                 @else
                     <div class="card-header">
@@ -62,7 +62,7 @@
                         <h6>作品を選んでください</h6>
                     </div>
                     <a href="" class="href">
-                        <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 380px;">
+                        <img class="img-thumbnail card-img-bottom" src="/img/l_e_others_500.png" alt="MOVIE" style="height: 490px;">
                     </a>
                 @endif
             </div>
