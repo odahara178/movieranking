@@ -12,8 +12,9 @@ class RankingController extends Controller
     public function index($id){
         $genres = Config::get('genres');
         $all_ranks = $this->getAllRank($id);
+        $genre_id = $id;
 
-        return view('movie.ranking', compact('genres', 'all_ranks'));
+        return view('movie.ranking', compact('genres', 'all_ranks', 'genre_id'));
     }
 
 // 指定ジャンルのデータのみ取得

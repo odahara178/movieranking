@@ -10,12 +10,15 @@ class MypageController extends Controller
 {
     public function index(){
         $user = $this->getMyranking();
-        if(isset($user)){
+        $usre_id = Auth::id();
+        $judge = DB::table('recommendeds')->where('user_id', '=', $usre_id)->first();
+
+        if(isset($judge)){
             $recommended_movies = $this->searchRecommended();
             $count_recommended_movies = $this->judgeCountMovie($recommended_movies);
         } else{
-            $recommended_movies = "オススメはありません";
-            $count_recommended_movies = "オススメはありません";
+            $recommended_movies = "daily:recommendedUpdateを叩いてください";
+            $count_recommended_movies = "daily:recommendedUpdateを叩いてください";
         }
         return view('movie.mypage',compact('user', 'recommended_movies', 'count_recommended_movies'));
     }
@@ -58,8 +61,10 @@ class MypageController extends Controller
     public function rankingChange(Request $request){
         $ranking_data = $request->all();
         $user_id = Auth::id();
+        if(isset($ranking_data['movie_id_1'])){
+            DB::table('users')->where('id', $user_id)->update(['ranking_1' => $ranking_data['movie_id_1'], 'ranking_2' => $ranking_data['movie_id_2'], 'ranking_3' => $ranking_data['movie_id_3']]);
+        }
         // 1.取得したリクエストを使用しuserテーブルのrankingカラムを更新する
-        DB::table('users')->where('id', $user_id)->update(['ranking_1' => $ranking_data['movie_id_1'], 'ranking_2' => $ranking_data['movie_id_2'], 'ranking_3' => $ranking_data['movie_id_3']]);
         return redirect()->back()->withInput();
     }
 

@@ -1,7 +1,9 @@
 @extends('movie.layouts.app')
 
 @section('content')
-
+<div class="leader">
+    <p class="text-center rounded bg-dark text-white">お気に入りの映画に応じておすすめの作品をマイページに表示します</p>
+</div>
 <div class="container mt-2">
         <div class="row">
                 @foreach ($favorites as $favorite)
